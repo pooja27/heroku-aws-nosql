@@ -1,0 +1,20 @@
+Week 1:
+As as team we have finalized the application, database, feature and modules to be integrated for the project.
+o	 The tasks are distributed, two guys working on backend part and other two on Node.js.
+o	 I am doing frontend part on Node.js on Heroku in which I will be working on the Node.js part and developing the rest api’s for our project. 
+o	We will be using express.js along with Node.js as express.js will work as middleware web framework for our web application.
+o	I have created the login/Signup page for the application.
+o	I am also searching more about Heroku platform and deploying Node.js application on that.
+o	 The login page and signup page are designed in such way so that signup part will not be annoying for the users.
+o	Signup Part has following fields:
+•	First Name
+•	 Last Name
+•	 Username/Email
+•	 Password	
+•	 Confirm Password.		
+•	 Contact Number.
+
+o	 We are also thinking of storing Users sessions on Redis, so that when user get logged in its state is stored on Redis so that we can save database overhead each time the request goes to backend.
+o	 Still deciding on feature as whether user will first land on home page or will thrown to login page first. 
+o	The address and other details of user will be asked later at billing time.
+o	 I am also exploring Bootstrap for the better UI experience and also Angular.js for the dynamic loading of the application.
