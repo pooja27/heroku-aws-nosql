@@ -1,0 +1,25 @@
+Week 1:
+We finalized on the application, database, features and modules to be implemented for the project. 
+I will be working on the back-end part. Following items were worked upon.
+
+-Features to be implemented for the application.  
+-Designed wireframes for the application. – Login/Signup/Billing history
+-Login and signup to happen on same page
+	Login:  Username as email /password
+	Signup:	email /password /confirm password /age ? /gender ?
+	Billing history: invoice generated for every transaction maintained here.
+	Product Catalog: Include - tea? coffe? equipment as categories?
+
+-Mongodb as database for product catalog. 
+-Installed mongo and mongo client robo-mongo for handling and firing queries.
+-Studied mongodb with respect to architecture and query model.
+-Reading the partition tolerance for MongoDB.
+
+-For the second database, we will be using redis for maintaining user-sessions.
+-Since we have decided store billing history, there can be analytics that can be done with Cassandra.
+
+-In the next week I am planning to check the partition tolerance for Mongodb on AWS.
+-Read cassandra to explore its analytic features and check for its feasibility.
+-Design product catalog for the starbucks application.
+-Write queries that will be needed for the processing user requests.
+-Need to finalize second database and its features.
