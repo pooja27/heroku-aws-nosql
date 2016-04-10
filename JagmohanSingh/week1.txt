@@ -17,4 +17,4 @@ o	Signup Part has following fields:
 o	 We are also thinking of storing Users sessions on Redis, so that when user get logged in its state is stored on Redis so that we can save database overhead each time the request goes to backend.
 o	 Still deciding on feature as whether user will first land on home page or will thrown to login page first. 
 o	The address and other details of user will be asked later at billing time.
-o	 I am also exploring Bootstrap for the better UI experience and also Angular.js for the dynamic loading of the application.
+o	 I am also exploring Bootstrap for the better UI experience and also 	Angular.js for the dynamic loading of the application.
