@@ -1,0 +1,13 @@
+In the week 1 to start off, we decided to build a Starbucks like shopping cart.
+Our team decided on the database, front-end technologies and functionalities to be present.
+              
+-	Being a newbie to node and heroku, I am currently learning these technologies.
+-	I shall be working on the front end on Node.js and heroku where I shall be developing the API for REST operations.
+-	I have cloned Professor Paul's c9 JavaScript repository and started practicing there in order to start with Node.
+-	I have collaborated with my team member to design the Signup page for the application.
+-	I am currently learning on how to build/deploy Node application on top of Heroku.
+-	The signup/login pages are meant to be totally user-friendly.
+-	Sign up page comprises of following fields: First Name, Last Name, Username/Email, Password, Confirm Password, and Contact Number.
+                 
+I am learning the usage of the Node and Heroku from the Heroku Dev Centre. The landing of user for the home page is yet to be decided.
+In the coming week, I will pair program with my teammate on Bootstrap for the better UI experience in the project.
