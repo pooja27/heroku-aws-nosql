@@ -3,3 +3,5 @@ Studied the deployment of Node.Js on Heroku.
 Also done the Heroku tutorial provided upon sign up with Heroku.
 Studied the mongoldb driver for Node.Js
 Started working on integrating nodes api with database.
+Starting design work for the product catalogue page.
+Writing Rest APIs in NodeJs for all the application interface.
