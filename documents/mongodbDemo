@@ -1,0 +1,62 @@
+mongoimport /Users/Gaggi/Downloads/mongodb-mva-master/module2_getting_started/bank_data.json --jsonArray --collection bank_data
+mongoimport /home/ec2-user/mongodb-mva/module2_getting_started/bank_data.json --jsonArray --collection bank_data
+
+CRUD Operations on Database
+
+Inserting Data
+db.bank_data.insertOne({"first_name" : "John",
+    "last_name" : "Cena",
+    "accounts" : [
+        {
+            "account_type" : "Investment",
+            "account_balance" : 6123524974.110823463,
+            "currency" : "USD"
+        },
+        {
+            "account_type" : "Savings",
+            "account_balance" : 132933272.569229168,
+            "currency" : "EURO"
+        }
+    ]});
+
+Read Operations:
+
+db.bank_data.findOne({});
+
+db.bank_data.findOne({"last_name":"SMITH"});
+
+Projections in MongoDb
+
+db.bank_data.findOne({"last_name":"Cena"},{"first_name":1,"_id":0});
+
+db.bank_data.find({last_name: "SMITH", "accounts.accounts": "Savings" }).pretty();
+
+Comparison Operators:
+
+$gt $lte
+
+db.bank_data.find({ "accounts.account_balance": {$eq:132933272.569229168}}).pretty();
+db.bank_data.find({ "accounts.account_balance": {$gte:8554996,$lte:9000000}}).pretty()[4];
+
+$and
+db.bank_data.find({$and:[{"accounts.account_type":"Checking"},{ "accounts.account_balance": {$gte:8554996,$lte:9000000}}]}).pretty()[4];
+
+$or
+db.bank_data.find({$and:[{"accounts.account_type":"Investment"},{"accounts.account_type":"Savings"}]}).pretty()[4];
+
+$elemMatch
+The $elemMatch operator matches documents that contain an array field with at least one element that matches all the specified query criteria.
+
+db.bank_data.find({last_name: "SMITH", "accounts.account_type": "Savings" }, { first_name: 1, last_name: 1, accounts: { $elemMatch : { 'account_type' : 'Savings' } } } ).pretty();
+
+$regex
+ db.bank_data.find({"first_name":{$regex:/^RI.*/}},{"first_name":1,"last_name":1,"_id":0}).pretty();
+
+ $size
+
+ db.bank_data.find({accounts:{$size:1}}).pretty();
+  db.bank_data.find({accounts:{$size:1}}).count();
+
+
+
+
