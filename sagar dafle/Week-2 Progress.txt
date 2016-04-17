@@ -1,0 +1,16 @@
+Waffle Board : https://waffle.io/shubhamvadhera/cmpe281-teamproject
+Github : https://github.com/shubhamvadhera/cmpe281-teamproject
+My Github profile : https://github.com/sagardafle
+
+- In the week 2 , we decided to enhance the UI for the login screen.I decided to add a modal box when the user clicks on the Register button. 
+- Only login screen will be shown to the user at the start.
+- I have committed the UI wireframe for the updated login screen.
+- Our team decided on the database, front-end technologies and functionalities to be present.
+- I started learning Angular JS for building a single page login application.
+- As the week proceeded, I was involved in the extra-credit demo for MongoDB. 
+- My key role was to find the key features and cons of the database.
+- I learnt that why Craiglist uses MongoDB and how replication works exactly in mongo. 
+- I was working to list the optimal use cases of the mongo database.
+- I was also a part of the basic querying for mongo DB for the presentation.
+- I have committed the UI wireframe for the home screen. The wireframe shall have the options for the users to see the list of beverages like coffee and tea.
+- In the coming week, I shall be working on the home screen of Starbucks application.
