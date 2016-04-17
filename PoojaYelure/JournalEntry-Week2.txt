@@ -1,0 +1,23 @@
+Week 2: 
+1. I read on basics of cassandra and redis.  
+2. I have worked on product catalogue design of database.
+3. Studied existing website of starbucks for the catalogue.
+4. Product Catalogue to sell 3 types of items for sale:
+	Coffee 
+	Tea
+	Equipments for sale.
+5. I have been building the data set by parsing of the HTML DOM structure.
+6. Jsoup library used to parse the existing job.
+7. Resolved issues faced while parsing.
+8. Json library used to create a json object for each item.
+9. Separate datamodel for each category.
+10. Studied the replication model of the MongoDB, got acquainted with the conecpts like primary node, secondary node and write concern.
+11. Setup of MongoDB on AWS done.
+12. Finished the tutorial : https://github.com/pooja27/mongodb-mva
+13. Setup the sample bank database and tried CRUD related queries.
+14. As after the discussion, currenltly we are planning to work on the MongoDB as the database only. 
+14. Write concern can be used to maintain a consistent system.
+15. Billing history and user related data to be generated for the next week.
+16. Also worked on the presentation for the Team demonstration on MongoDB.
+17. I also studied how the event loop and closures in javascript work in detail.
+18. In the next week I am planning on writing queries for the project that demonstrate user selections.
