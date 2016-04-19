@@ -1,3 +1,7 @@
 ps -eaf|grep mongod
 sudo service mongod status
 sudo service mongod start
+
+Queries:
+
+db.col_test.find().pretty()
