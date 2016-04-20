@@ -23,6 +23,10 @@ app.use(express.methodOverride());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(express.bodyParser());
+app.use(express.cookieParser());
+app.use(express.session({ secret: 'keyboard cat', cookie: { maxAge: 60000 }}));
+
 // development only
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
@@ -32,9 +36,9 @@ if ('development' == app.get('env')) {
 app.get('/', routes.index);
 app.post('/signup',userRegisteration.signup);
 app.post('/login',userRegisteration.login);
-app.get('/product',product.show);
-app.post('/cart',product.cart);
-app.post('/bill',product.bill);
+//app.get('/product',product.show);
+//app.post('/cart',product.cart);
+//app.post('/bill',product.bill);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
