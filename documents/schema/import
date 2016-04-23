@@ -1,5 +1,3 @@
 mongoimport --db starbucks --collection drinkware --jsonArray --drop --file productCatalogueDrinkware.json
 mongoimport --db starbucks --collection coffee --jsonArray --drop --file productCatalogueCoffee.json
 mongoimport --db starbucks --collection tea --jsonArray --drop --file productCatalogueTea.json
-
-
