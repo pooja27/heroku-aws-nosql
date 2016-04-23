@@ -4,6 +4,15 @@ Created by Sagar Dafle on 19th April,2016
 <head>
 <link rel="stylesheet" type="text/css" href="style.css">
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/css/bootstrap.css">
+<link rel="stylesheet" href="splash.css">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.18/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.7/angular-resource.min.js"></script>
+<script src="lib/angular-route-v1.2.22.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.11.0/ui-bootstrap.min.js"></script>
+<script src="lib/angular-route-v1.2.22.js"></script>
+  <script type="text/javascript" src="splash.js"></script>
+  
 <script>
 $(document).ready(function () {
     $('.forgot-pass').click(function(event) {
@@ -13,9 +22,17 @@ $(document).ready(function () {
       $(".pr-wrap").removeClass("show-pass-reset");
     }); 
 });
+
+
 </script>
+<style>
+#block1, #block2
+{
+    display:inline;
+}
+</style>
 </head>
-<body>
+<body ng-app="splashDemo" ng-controller="MainCtrl as main">
 
 <div class="container">
     <div class="row">
@@ -36,22 +53,34 @@ $(document).ready(function () {
 					<input type="submit" value="Sign In" class="btn btn-default btn-sm" />
 					<div class="remember-forgot">
 						<div class="row">
-							<div class="col-xs-6">
-								<div class="checkbox">
+							<div class="col-xs-6" >
+								<div class="checkbox" id="block1">
 									<label>
 										<input type="checkbox" />
 										Remember Me
 									</label>
-								</div>
-							</div>
-							<div class="col-xs-6 forgot-pass-content">
+								</div> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<div class="col-xs-6 forgot-pass-content" id="block2">
 								<a href="javascription:void(0)" class="forgot-pass">Forgot Password</a>
 							</div>
+							
+							</div>
+							
+							
 						</div>
 					</div>
                 </form>
             </div>
-			
+<!--<div class="hot-container">
+	<p>
+		<a href="#" class="btn btn-red">Sign Up!</a>
+	</p>
+</div> -->
+  
+    <div class="row page-header">
+        <button class="btn btn-lg btn-success" ng-click="main.openSplash()">Sign Up</button>
+     
+    </div>
         </div>
     </div>
     </div>
