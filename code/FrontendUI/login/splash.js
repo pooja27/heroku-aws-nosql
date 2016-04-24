@@ -1,6 +1,6 @@
 // Module for the demo
 
-angular.module('splashDemo', ['ngRoute' ,'ui.splash'])
+angular.module('splashDemo', ['ui.splash'])
 .controller('MainCtrl', ['$splash', function ($splash) {
   this.openSplash = function () {
     $splash.open({
@@ -11,7 +11,7 @@ angular.module('splashDemo', ['ngRoute' ,'ui.splash'])
 }]);
 
 // Re-usable $splash module
-angular.module('ui.splash', ['ngRoute', 'ui.bootstrap', 'ngAnimate'])
+angular.module('ui.splash', ['ui.bootstrap', 'ngAnimate'])
 .service('$splash', [
   '$uibModal',
   '$rootScope',

@@ -4,6 +4,10 @@ body {
     font-family: 'Source Sans Pro', sans-serif;
 }
 
+#signupbutton{
+	padding-right:20px;
+}
+
 /* Slideshow style */
 .splash {
     position: fixed;
