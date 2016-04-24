@@ -1,0 +1,21 @@
+Week 3: 
+1. Figured out the DOM structure of the HTML for the exisiting pages.
+2. Parsed the categories coffee, tea and drinkware. Created models for product catalogue for same.
+3. Imported the json arrays into the database.
+4. Wrote all the import statemtns and the user quieries that will come from the client side.
+5. Team disucssion on finaizing the architecture of the project done.
+6. Disucssion of REST APIs done.
+7. Endpoints decided for the REST API's on the MongoDB finalized.
+8. Working on the deployment of replication set on the AWS.
+9. Created Virtual Private Cloud (VPC) and three subnets,  currently keeping 3 instances in 3 separate Avalability zones.
+10. Allocated public IPs.
+12. Installed the mongod instance on the primary node. Tested and works fine.
+13. Getting some issues in connecting to the secondary nodes. 
+14. Troubleshooting the same.
+15. Screenshots of the status so far has been updated on the git hub.
+16. Reading different blogs to setup the replica set on a distributed environment.
+17. Researching on different ways to implement scaling and distributing load.
+18. To be finalized after team discussion.
+19. Plan to simulate partition tolerance once the setup is complete.
+20. Write queries for inventory management and billing to be implemented.
+
