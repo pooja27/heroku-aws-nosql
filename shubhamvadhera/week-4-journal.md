@@ -4,7 +4,9 @@
 	* There will be 3 kinds of products - tea, coffee, drinkware
 	* Collection - products
 		* Will store product name, product type, description and price
-	* REST - products
+	* REST - GET  - products
 		* will return product details on product name
+	* REST - POST  - products
+		* to save new products data
 	* REST allProducts
 		* will return array of all products
