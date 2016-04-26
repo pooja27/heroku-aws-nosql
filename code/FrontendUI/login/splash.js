@@ -50,7 +50,8 @@ angular.module('ui.splash', ['ui.bootstrap', 'ngAnimate'])
 	  'Contact No: &nbsp;&nbsp;<input type="telephone" id="phone" style="background-color : #000000; border-radius:5px;" /><br>'+
       '<button class="btn btn-lg btn-outline" ng-bind="btnText || \'Register\'" ng-click="$close()"></button>' +
       '</div>'+
-	  '</form>'
+	  '</form>'+
+	  '<button class="fa fa-times" style="margin-left: 900px;  margin-top: 120px;" ng-bind="btnText || \'Cancel\'" ng-click="$close()"></button>'
     );
   }
 ]);
