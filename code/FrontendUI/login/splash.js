@@ -4,8 +4,8 @@ angular.module('splashDemo', ['ui.splash'])
 .controller('MainCtrl', ['$splash', function ($splash) {
   this.openSplash = function () {
     $splash.open({
-      title: 'Hi there!',
-      message: "This sure is a fine modal, isn't it?"
+      title: 'Welcome to Starbucks!',
+      message: "Please enter details below"
     });
   };
 }]);
@@ -40,11 +40,17 @@ angular.module('ui.splash', ['ui.bootstrap', 'ngAnimate'])
       '</section>'
     );
     $templateCache.put('splash/content.html',
+	'<form id="registrationform" name="regform" action="\homescreen\\homepage.html">'+
       '<div class="splash-content text-center">' +
-      '  <h1 ng-bind="title"></h1>' +
-      '  <p class="lead" ng-bind="message"></p>' +
-      '  <button class="btn btn-lg btn-outline" ng-bind="btnText || \'Ok, cool\'" ng-click="$close()"></button>' +
-      '</div>'
+      '<h1 ng-bind="title"></h1>' +
+      '<p class="lead" ng-bind="message"></p>' +
+	  'Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="uname" style="background-color : #000000; border-radius:5px;" /><br><br>'+
+	  'Password:&nbsp;&nbsp;&nbsp;&nbsp; <input type="password" id="password" style="background-color : #000000; border-radius:5px;" /><br><br>'+
+	  'Email ID:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="email" id="email" style="background-color : #000000; border-radius:5px;" /><br><br>'+
+	  'Contact No: &nbsp;&nbsp;<input type="telephone" id="phone" style="background-color : #000000; border-radius:5px;" /><br>'+
+      '<button class="btn btn-lg btn-outline" ng-bind="btnText || \'Register\'" ng-click="$close()"></button>' +
+      '</div>'+
+	  '</form>'
     );
   }
 ]);

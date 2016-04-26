@@ -20,10 +20,18 @@ $(document).ready(function () {
 
 </script>
 <style>
-#block1, #block2
+#block2,fgtpass{
+    padding-bottom: 100px;
+    position: fixed;
+	}
+	#fgtpass{
+	position:relative;}
+.col-xs-6,#block1, #block2
 {
     display:inline;
 }
+.remember-forgot{
+width:900px}
 </style>
 </head>
   <body ng-app="splashDemo" ng-controller="MainCtrl as main">
@@ -51,22 +59,23 @@ $(document).ready(function () {
 					<input type="password" placeholder="Password" />
 					<input type="submit" value="Sign In" class="btn btn-default btn-sm" />
 					<div class="remember-forgot">
-						<div class="row">
-							<div class="col-xs-6" >
-								<div class="checkbox" id="block1">
+						
+							<div class="col-xs-6" id="block1">
+								<div class="checkbox" >
 									<label>
 										<input type="checkbox" />
 										Remember Me
 									</label>
-								</div> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<div class="col-xs-6 forgot-pass-content" id="block2">
-								<a href="javascription:void(0)" class="forgot-pass">Forgot Password</a>
+								</div>
+								</div>
+								<div class="col-xs-7 forgot-pass-content" id="block2">
+								<a href="javascription:void(0)" if="fgtpass" class="forgot-pass">Forgot Password</a>
 							</div>
 							
-							</div>
 							
 							
-						</div>
+							
+						
 					</div>
                 </form>
             </div>
