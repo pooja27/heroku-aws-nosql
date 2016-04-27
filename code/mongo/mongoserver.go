@@ -14,6 +14,10 @@ import (
 	"gopkg.in/mgo.v2/bson"
 )
 
+const (
+    Database = "db_test"
+)
+
 /* ------- Debugging variables ------- */
 var out io.Writer
 var debugModeActivated bool
@@ -21,12 +25,45 @@ var debugModeActivated bool
 /* ------- Structs ------- */
 
 //struct to store in products collection
-type Product struct {
-	ProductID		string	`json:"productid" bson:"productid"`
-	Name				string 	`json:"name" bson:"name"`
-	Type				string 	`json:"type" bson:"type"`
-	Description string 	`json:"description" bson:"description"`
-	Price 			float64	`json:"price" bson:"price"`
+// type Product struct {
+// 	ProductID		string	`json:"productid" bson:"productid"`
+// 	Name				string 	`json:"name" bson:"name"`
+// 	Type				string 	`json:"type" bson:"type"`
+// 	Description string 	`json:"description" bson:"description"`
+// 	Price 			float64	`json:"price" bson:"price"`
+// }
+
+//struct to store in coffee collection
+type ProductCoffee struct {
+	Region		string	`json:"region" bson:"region"`
+	Category	string 	`json:"category" bson:"category"`
+	Price			float64 `json:"price" bson:"price"`
+	ItemID 		string 	`json:"item_id" bson:"item_id"`
+	Name 			string	`json:"name" bson:"name"`
+	Flavor		string	`json:"flavor" bson:"flavor"`
+	Quantity	int64		`json:"quantity" bson:"quantity"`
+	Roast			string	`json:"roast" bson:"roast"`
+	Type			string	`json:"type" bson:"type"`
+}
+
+//struct to store in tea collection
+type ProductTea struct {
+	Category	string 	`json:"category" bson:"category"`
+	Price			float64 `json:"price" bson:"price"`
+	Count			int64		`json:"count" bson:"count"`
+	ItemID 		string 	`json:"item_id" bson:"item_id"`
+	Name 			string	`json:"name" bson:"name"`
+	Brand			string	`json:"brand" bson:"brand"`
+	Type			string	`json:"type" bson:"type"`
+	TeaForm		string	`json:"tea_form" bson:"tea_form"`
+}
+
+//struct to store in drinkware collection
+type ProductDrinkware struct {
+	Category	string 	`json:"category" bson:"category"`
+	Price			float64 `json:"price" bson:"price"`
+	ItemID 		string 	`json:"item_id" bson:"item_id"`
+	Name 			string	`json:"name" bson:"name"`
 }
 
 //struct to return success / failure status
@@ -50,11 +87,11 @@ type ResponseController struct {
 
 /* ------- REST Functions ------- */
 
-// Login serves the Login GET request
-func (rc ResponseController) GetAllProducts(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
-	fmt.Println("GET Request product: allProducts")
+// GetAllCoffee serves the coffee GET request
+func (rc ResponseController) GetAllCoffee(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+	fmt.Println("GET Request all coffee")
 
-	resp, err := getAllProductsDB(rc)
+	resp, err := getAllCoffeeDB(rc)
 	if err != nil {
 		sendErrorResponse(w,err,404)
 		return
@@ -65,12 +102,11 @@ func (rc ResponseController) GetAllProducts(w http.ResponseWriter, r *http.Reque
 	fmt.Println("Response:", string(jsonOut), " 200 OK")
 }
 
-// Login serves the Login GET request
-func (rc ResponseController) GetProduct(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
-	productid := p.ByName("productid")
-	fmt.Println("GET Request product: productid:", productid)
+// GetAllTea serves the tea GET request
+func (rc ResponseController) GetAllTea(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+	fmt.Println("GET Request all tea")
 
-	resp, err := getProductDB(productid, rc)
+	resp, err := getAllTeaDB(rc)
 	if err != nil {
 		sendErrorResponse(w,err,404)
 		return
@@ -81,27 +117,73 @@ func (rc ResponseController) GetProduct(w http.ResponseWriter, r *http.Request, 
 	fmt.Println("Response:", string(jsonOut), " 200 OK")
 }
 
-// SaveProduct serves the products POST request
-func (rc ResponseController) SaveProduct(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
-	var req Product
+// GetAllTea serves the tea GET request
+func (rc ResponseController) GetAllDrinkware(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+	fmt.Println("GET Request all drinkware")
 
-	defer r.Body.Close()
-
-	jsonIn, err := ioutil.ReadAll(r.Body)
+	resp, err := getAllDrinkwareDB(rc)
 	if err != nil {
-		sendErrorResponse(w,err,400)
+		sendErrorResponse(w,err,404)
 		return
 	}
 
-	json.Unmarshal([]byte(jsonIn), &req)
-	fmt.Println("POST Request product:", req)
-
-	if err := rc.session.DB("db_test").C("products").Insert(req); err != nil {
-		sendErrorResponse(w,err,500)
-		return
-	}
-	sendSuccessResponse(w,201)
+	jsonOut, _ := json.Marshal(resp)
+	httpResponse(w, jsonOut, 200)
+	fmt.Println("Response:", string(jsonOut), " 200 OK")
 }
+
+// // Login serves the Login GET request
+// func (rc ResponseController) GetAllProducts(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+// 	fmt.Println("GET Request product: allProducts")
+//
+// 	resp, err := getAllProductsDB(rc)
+// 	if err != nil {
+// 		sendErrorResponse(w,err,404)
+// 		return
+// 	}
+//
+// 	jsonOut, _ := json.Marshal(resp)
+// 	httpResponse(w, jsonOut, 200)
+// 	fmt.Println("Response:", string(jsonOut), " 200 OK")
+// }
+
+// // Login serves the Login GET request
+// func (rc ResponseController) GetProduct(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+// 	productid := p.ByName("productid")
+// 	fmt.Println("GET Request product: productid:", productid)
+//
+// 	resp, err := getProductDB(productid, rc)
+// 	if err != nil {
+// 		sendErrorResponse(w,err,404)
+// 		return
+// 	}
+//
+// 	jsonOut, _ := json.Marshal(resp)
+// 	httpResponse(w, jsonOut, 200)
+// 	fmt.Println("Response:", string(jsonOut), " 200 OK")
+// }
+
+// // SaveProduct serves the products POST request
+// func (rc ResponseController) SaveProduct(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+// 	var req Product
+//
+// 	defer r.Body.Close()
+//
+// 	jsonIn, err := ioutil.ReadAll(r.Body)
+// 	if err != nil {
+// 		sendErrorResponse(w,err,400)
+// 		return
+// 	}
+//
+// 	json.Unmarshal([]byte(jsonIn), &req)
+// 	fmt.Println("POST Request product:", req)
+//
+// 	if err := rc.session.DB("db_test").C("products").Insert(req); err != nil {
+// 		sendErrorResponse(w,err,500)
+// 		return
+// 	}
+// 	sendSuccessResponse(w,201)
+// }
 
 // Signup serves the signup POST request
 func (rc ResponseController) Signup(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
@@ -227,49 +309,79 @@ func (rc ResponseController) Login(w http.ResponseWriter, r *http.Request, p htt
 // 	fmt.Println("Response:", string(jsonOut), " 201 OK")
 // }
 
-// DeleteLocation deletes existing user
-func (rc ResponseController) DeleteDocument(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
-	id := p.ByName("id")
-	fmt.Println("DELETE Request: ID:", id)
-
-	if !bson.IsObjectIdHex(id) {
-		w.WriteHeader(404)
-		fmt.Println("Response: 404 Not Found")
-		return
-	}
-
-	oid := bson.ObjectIdHex(id)
-
-	if err := rc.session.DB("db_test").C("col_test").RemoveId(oid); err != nil {
-		fmt.Println("Response: 404 Not Found")
-		return
-	}
-
-	fmt.Println("Response: 200 OK")
-	w.WriteHeader(200)
-}
+// // DeleteLocation deletes existing user
+// func (rc ResponseController) DeleteDocument(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+// 	id := p.ByName("id")
+// 	fmt.Println("DELETE Request: ID:", id)
+//
+// 	if !bson.IsObjectIdHex(id) {
+// 		w.WriteHeader(404)
+// 		fmt.Println("Response: 404 Not Found")
+// 		return
+// 	}
+//
+// 	oid := bson.ObjectIdHex(id)
+//
+// 	if err := rc.session.DB("db_test").C("col_test").RemoveId(oid); err != nil {
+// 		fmt.Println("Response: 404 Not Found")
+// 		return
+// 	}
+//
+// 	fmt.Println("Response: 200 OK")
+// 	w.WriteHeader(200)
+// }
 
 /* ------- Helper Functions ------- */
 
-//Get data corresponding to the user id
-func getAllProductsDB(rc ResponseController) ([]Product, error) {
-	var resp []Product
+//Get all tea products from DB
+func getAllDrinkwareDB(rc ResponseController) ([]ProductDrinkware, error) {
+	var resp []ProductDrinkware
 
-	if err := rc.session.DB("db_test").C("products").Find(nil).All(&resp); err != nil {
+	if err := rc.session.DB(Database).C("drinkware").Find(nil).All(&resp); err != nil {
 		return resp, err
 	}
 	return resp, nil
 }
 
-//Get data corresponding to the user id
-func getProductDB(productid string, rc ResponseController) (Product, error) {
-	var resp Product
+//Get all tea products from DB
+func getAllTeaDB(rc ResponseController) ([]ProductTea, error) {
+	var resp []ProductTea
 
-	if err := rc.session.DB("db_test").C("products").Find(bson.M{"productid" : productid}).One(&resp); err != nil {
+	if err := rc.session.DB(Database).C("tea").Find(nil).All(&resp); err != nil {
 		return resp, err
 	}
 	return resp, nil
 }
+
+//Get all coffee products from DB
+func getAllCoffeeDB(rc ResponseController) ([]ProductCoffee, error) {
+	var resp []ProductCoffee
+
+	if err := rc.session.DB(Database).C("coffee").Find(nil).All(&resp); err != nil {
+		return resp, err
+	}
+	return resp, nil
+}
+
+// //Get data corresponding to the user id
+// func getAllProductsDB(rc ResponseController) ([]Product, error) {
+// 	var resp []Product
+//
+// 	if err := rc.session.DB("db_test").C("products").Find(nil).All(&resp); err != nil {
+// 		return resp, err
+// 	}
+// 	return resp, nil
+// }
+//
+// //Get data corresponding to the user id
+// func getProductDB(productid string, rc ResponseController) (Product, error) {
+// 	var resp Product
+//
+// 	if err := rc.session.DB("db_test").C("products").Find(bson.M{"productid" : productid}).One(&resp); err != nil {
+// 		return resp, err
+// 	}
+// 	return resp, nil
+// }
 
 //Get data corresponding to the user id
 func getUserDetailsDB(userid string, rc ResponseController) (UserDetails, error) {
@@ -351,10 +463,13 @@ func main() {
 	rc := NewResponseController(getSession())
 	//r.GET("/mongoserver/:id", rc.GetDocument)
 	r.GET("/mongoserver/login/:userid", rc.Login)
-	r.GET("/mongoserver/product/:productid", rc.GetProduct)
-	r.GET("/mongoserver/allProducts", rc.GetAllProducts)
+	r.GET("/mongoserver/allTea", rc.GetAllTea)
+	r.GET("/mongoserver/allCoffee", rc.GetAllCoffee)
+	r.GET("/mongoserver/allDrinkware", rc.GetAllDrinkware)
+	// r.GET("/mongoserver/product/:productid", rc.GetProduct)
+	// r.GET("/mongoserver/allProducts", rc.GetAllProducts)
 	// r.POST("/mongoserver", rc.CreateDocument)
-	r.POST("/mongoserver/product", rc.SaveProduct)
+	// r.POST("/mongoserver/product", rc.SaveProduct)
 	r.POST("/mongoserver/signup", rc.Signup)
 	// r.DELETE("/mongoserver/:id", rc.DeleteDocument)
 	// r.PUT("/mongoserver/:id", rc.UpdateDocument)
