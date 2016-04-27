@@ -1,0 +1,13 @@
+Waffle Board : https://waffle.io/shubhamvadhera/cmpe281-teamproject
+Github : https://github.com/shubhamvadhera/cmpe281-teamproject
+My Github profile : https://github.com/sagardafle
+- This week , I completed development of the login and sign-up homepage for the Starbucks project. 
+- The technologies used for Login development is : BootStrap,Angular JS,HTML5 and CSS3. 
+- Apart from Login option, I have also commited the code for the sing up page.
+- I learnt using Angular JS for building rich one page login application and used it in our sign-up module.
+- The sign-up is also built over a bootstrap modal box that serves as a rich UI. On clicking the modal box, the user sees the registration web page.
+- After the login page was developed, I proceeded with the homescreen page after the team accepted it.
+- I have finished developing some portion of the homescreen and the remaining shall be done in the coming week.
+- The team also spent time together to decide on the REST endpoints to be implemented. 
+- I have parallely taken up the task to learn deployment on Heroku which shall be completed and implemented in the coming week.
+- In the coming week, my main area of focus would be intergration of code with databases and deployment on Heroku.

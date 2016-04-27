@@ -1,0 +1,27 @@
+COFFEE
+db.coffee.find({type : "regular"})
+db.coffee.find({type : "decaffinated"})
+
+db.coffee.find({roast : "dark"})
+db.coffee.find({roast : "blonde"})
+db.coffee.find({roast : "medium"})
+
+db.coffee.find({region : "asia-pacific"})
+db.coffee.find({region : "multi"})
+db.coffee.find({region : "latin america"})
+
+-------------------------------------------------------------
+TEA
+db.tea.find({tea_form : "K-Cup Pods"})
+db.tea.find({tea_form : "tea bags"})
+
+db.tea.find({type : "black tea"})
+db.tea.find({type : "chai tea"})
+db.tea.find({type : "green tea"})
+db.tea.find({type : "tea bags"})
+db.tea.find({type : "ice tea"})
+
+db.tea.find({brand : "tazo"})
+db.tea.find({brand : "teavana"})
+
+-------------------------------------------------------------
