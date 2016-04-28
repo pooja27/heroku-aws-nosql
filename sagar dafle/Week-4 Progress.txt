@@ -1,0 +1,5 @@
+Waffle Board : https://waffle.io/shubhamvadhera/cmpe281-teamproject
+Github : https://github.com/shubhamvadhera/cmpe281-teamproject
+My Github profile : https://github.com/sagardafle
+- This week , I added the required fields in the signup page and integrated the login-signup module with the node JS server.
+- Met with the team to discuss on the design of the homescreen and the REST endpoints to use. 
