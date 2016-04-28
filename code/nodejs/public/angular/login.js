@@ -1,12 +1,13 @@
 /**
  * Created by Jagmohan on 4/9/16.
  */
+
 var app = angular.module('loginApp', []);
 app.controller('loginController', function ($http,$scope)
 {alert("HEllo");
 
 
-    $scope.login=function(){alert("HEllo");
+    $scope.login=function(){
         $http({
             method: 'POST',
             url: '/login',
