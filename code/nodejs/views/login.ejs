@@ -1,0 +1,86 @@
+<!--
+Created by Sagar Dafle on 19th April,2016
+-->
+<head>
+<link rel="stylesheet" type="text/css" href="stylesheets/style.css">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+   <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/css/bootstrap.css">
+    <link rel="stylesheet" href="stylesheets/splash.css">
+  
+<script>
+$(document).ready(function () {
+    $('.forgot-pass').click(function(event) {
+      $(".pr-wrap").toggleClass("show-pass-reset");
+    }); 
+    $('.pass-reset-submit').click(function(event) {
+      $(".pr-wrap").removeClass("show-pass-reset");
+    }); 
+});
+
+
+</script>
+<style>
+#block2,fgtpass{
+    padding-bottom: 100px;
+    position: fixed;
+	}
+	#fgtpass{
+	position:relative;}
+.col-xs-6,#block1, #block2
+{
+    display:inline;
+}
+.remember-forgot{
+width:900px}
+</style>
+</head>
+  <body ng-app="splashDemo" ng-controller="MainCtrl as main">
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <button class="btn btn-lg btn-success" id="signupbutton" ng-click="main.openSplash()">Sign Up!</button>
+      </div>
+    </div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="pr-wrap">
+                <div class="pass-reset">
+                    {{less}}
+                    <label>Enter the email you signed up with</label>
+                    <input type="email" placeholder="Email" />
+                    <input type="submit" value="Submit" class="pass-reset-submit btn btn-success btn-sm" />
+                </div>
+            </div>
+        	
+            <div class="wrap">
+                <p class="form-title">Sign In</p>
+                <form class="login" name="form" ng-submit="login()" role="form">
+
+                        <label for="username">Email</label>
+                        <input type="text" name="email" id="username" class="form-control" ng-model="userLogin.username"  />
+
+                        <label for="password">Password</label>
+                        <input type="password" name="password" id="password" class="form-control" ng-model="userLogin.password" required />
+
+
+                        <button type="submit"  class="btn btn-primary btn-sm">Login</button>
+
+
+                </form>
+
+            </div>
+<!--<div class="hot-container">
+	<p>
+		<a href="#" class="btn btn-red">Sign Up!</a>
+	</p>
+</div> -->
+        </div>
+    </div>
+    </div>
+	</body>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular-animate.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.14.3/ui-bootstrap.min.js"></script>
+  <script type="text/javascript" src="angular/splash.js"></script>
+  </html>

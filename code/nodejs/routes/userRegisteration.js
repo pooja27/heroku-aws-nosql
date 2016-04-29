@@ -5,84 +5,57 @@ var http=require("http");
 exports.login=function(req,res){
     var email = req.param('username');
     var password = req.param('password');
-    //var query=JSON.stringify({
-    //        "userid" : "jagg",
-    //
-    //    }
-    //);
-    //var postheaders = {
-    //    'Content-Type' : 'application/json',
-    //    'Content-Length' : Buffer.byteLength(query)
-    //};
+
     var options = {
-        host: "ec2-54-175-24-14.compute-1.amazonaws.com",
+        host: 'ec2-52-202-168-18.compute-1.amazonaws.com',
         port: 7777,
-        path: "/mongoserver/login/"+"jagg@sjsu.edu",
+        path: "/mongoserver/login/"+email,
         method: 'GET'
     };
 
 callback = function(response) {
     var str = '';
 
-// str+="statusCode:"+response.statusCode+"\n";
     console.log(response.statusCode);
     response.on('error',function(){
         console.log("Error in response: "+"\n"+str);
 
     })
     response.on('data', function (chunk) {
-        str += chunk+"\n";
+        str += chunk;
     });
 
 
     response.on('end', function () {
-        console.log(str);
+        var data = JSON.parse(str);
+       if(password===data.password)
+       {req.session.data=data;
+           res.status(200).send(data);}
+        else
+            res.status(404).send({"data":"Incorrect Password"});
     });
 }
 
 http.get(options, callback).end();
-    //mongo.connect(mongoURL, function(){
-    //    console.log('Connected to mongo at: ' + mongoURL);
-    //    var coll = mongo.collection('userDetails');
-    //    coll.findOne({"email:": email, "password":password }, function(err, user){
-    //        if(user)
-    //        {
-    //            console.log(user.email);
-    //            res.status(200).send({"status":"Login Successful"});
-    //        }
-    //        else
-    //        {
-    //             res.status(401).send({"status":"Login Failed"});
-    //
-    //        }
-    //
-    //    });
-    //
-    //});
-    //
 
 };
 
 exports.signup=function(req,res) {
-//    var email = req.param('username');
-//    var password = req.param('password');
-//    var firstName = req.param('firstName');
-//    var lastName = req.param('lastName');
-//    var mobileNumber = req.param('mobileNumber');
-//    console.log(email);
-//    console.log(password);
-//    console.log(firstName);
-//    console.log(lastName);
-//    console.log(mobileNumber);
+   var email = req.param('username');
+   var password = req.param('password');
+   var firstName = req.param('firstName');
+   var lastName = req.param('lastName');
+
 var query=JSON.stringify({
-        "userid" : "poo",
-        "password":"poom@sjsu.edu",
-        "name" : "Pooja"
+    "userid" : email,
+    "password" : password,
+    "email" : email,
+    "name" : firstName+" "+lastName
     }
 );
 
 var options = {
-    host: 'ec2-54-175-24-14.compute-1.amazonaws.com',
+    host: 'ec2-52-202-168-18.compute-1.amazonaws.com',
     port: 7777,
     path: '/mongoserver/signup',
     method: 'POST',
@@ -92,9 +65,13 @@ var options = {
     }
 
 };
-var reqPost = http.request(options, function (res) {
-    console.log("response statusCode: ", res.statusCode);
-    res.on('data', function (data) {
+var reqPost = http.request(options, function (response) {
+
+    if(response.statusCode===201)
+    res.status(200).send({"data":"Registration Successful"});
+    else
+    res.status(404).send({"data":"Registration Failed"});
+    response.on('data', function (data) {
         console.log('Posting Result:\n');
         process.stdout.write(data);
         console.log('\n\nPOST Operation Completed');

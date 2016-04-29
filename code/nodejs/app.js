@@ -7,11 +7,14 @@ var express = require('express')
   , routes = require('./routes')
   , user = require('./routes/user')
     ,userRegisteration = require('./routes/userRegisteration')
+    ,products = require('./routes/products')
   , http = require('http')
   , path = require('path');
 
 var app = express();
-
+app.use(express.bodyParser());
+app.use(express.cookieParser());
+app.use(express.session({ secret: 'starbucks_001', duration: 30*60*1000}));
 // all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/views');
@@ -23,9 +26,7 @@ app.use(express.methodOverride());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(express.bodyParser());
-app.use(express.cookieParser());
-app.use(express.session({ secret: 'keyboard cat', cookie: { maxAge: 60000 }}));
+
 
 // development only
 if ('development' == app.get('env')) {
@@ -36,7 +37,7 @@ if ('development' == app.get('env')) {
 app.get('/', routes.index);
 app.post('/signup',userRegisteration.signup);
 app.post('/login',userRegisteration.login);
-//app.get('/product',product.show);
+app.get('/allProducts',products.show);
 //app.post('/cart',product.cart);
 //app.post('/bill',product.bill);
 

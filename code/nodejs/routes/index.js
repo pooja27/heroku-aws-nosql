@@ -4,5 +4,8 @@
  */
 
 exports.index = function(req, res){
-  res.render('index');
+  if(req.session.data)
+  res.render('home');
+  else
+  res.render('login');
 };
