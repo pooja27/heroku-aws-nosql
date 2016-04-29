@@ -379,17 +379,35 @@
 						<div class="row">
 
 							<div class="sec-title text-center white wow animated fadeInDown">
-								<h2>Buy your favourite coffees now</h2>
+								<h2>Buy your favourite coffee now</h2>
 							</div>
 
 							<div ng-app="myApp" ng-controller="Controller">
-								<div ng-repeat="country in countries" id="box" width="10px" height ="10px">
-									{{country.name}} has population of {{country.population}}
+								<script type="text/javascript" >
+									var counter =1;
+									var row_number = 1;
+									var temp = "col-md-4"  + row_number;
+
+								</script>
+								<div class="row">
+                                    <div class= "col-md-4"  ng-repeat="coffeedata in coffecataloge">
+									<!-- <script type="text/javascript" > alert(counter); if(counter%3 == 0) ++row_number; </script> -->
+                                    <div id="product-box" style="width:600px;height:250px" >
+                                        <div style="width:350px;height:250px;border:1px solid #000;">
+                                            <div>{{ coffeedata.name }}</div>
+                                            <div>In Stock : {{ coffeedata.quantity }}</div>
+                                            <div>Price: {{ coffeedata.price }}</div> <br><br><br>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <a href="#add-to-cart" class="btn btn-red btn-effect">Add to Cart</a>
+                                        </div>
+
+                                    </div>
 									<br>
 								</div>
-							<!--	<li ng-repeat="country in countries">
+                                </div>
+								<!--<li ng-repeat="country in countries">
 									{{country.name}} has population of {{country.population}}
-								</li> -->
+								</li>  -->
 								<hr>
 								World's population: {{population}} millions
 							</div>
