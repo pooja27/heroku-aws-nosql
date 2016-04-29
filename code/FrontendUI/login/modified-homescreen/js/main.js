@@ -1,17 +1,1255 @@
-/*var app = angular.module('myApp', []);
+/*
+var app = angular.module('myApp', []);
 app.controller("Controller", ['$scope', function($scope){
 
     $scope.population = 7000;
     $scope.countries = [
         {name: 'France', population: 63.1},
-        {name: 'United Kingdom', population: 61.8}
+        {name: 'United Kingdom', population: 63.8},
+        {name: 'India', population: 64.8},
+        {name: 'Egypt', population: 66.8},
+        {name: 'Germany', population: 63.8},
+        {name: 'Switzerland', population: 62.8},
+        {name: 'Australia', population: 68.8},
+        {name: 'Zimbabwe', population: 21.8},
+        {name: 'RSA', population: 51.8}
     ];
 
 
-}]);*/
+}]);
+*/
 
 
-//var jsonData = JSON.parse(productCatalogueCoffee.json);
+var app = angular.module('myApp', []);
+app.controller("Controller", ['$scope', function($scope) {
+    $scope.coffecataloge = [{
+        "region": "latin america",
+        "category": "coffee",
+        "price": 40,
+        "name": "Sulawesi, Whole Bean",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "blonde",
+        "type": "decaffinated"
+    }, {
+        "region": "multi",
+        "category": "coffee",
+        "price": 50,
+        "name": "3 Region Blend, Whole Bean",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "medium",
+        "type": "regular"
+    }, {
+        "region": "multi",
+        "category": "coffee",
+        "price": 50,
+        "name": "Starbucks Reserve Eastern D.R. Congo Lake Kivu",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "medium",
+        "type": "regular"
+    }, {
+        "region": "latin america",
+        "category": "coffee",
+        "price": 40,
+        "name": "Starbucks Reserve Burundi Murambi",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "blonde",
+        "type": "decaffinated"
+    }, {
+        "region": "multi",
+        "category": "coffee",
+        "price": 50,
+        "name": "Starbucks Reserve Malawi Sable Farms",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "medium",
+        "type": "regular"
+    }, {
+        "region": "asia-pacific",
+        "category": "coffee",
+        "price": 20,
+        "name": "Starbucks Espresso Roast Espresso Verismo Pods",
+        "flavor": "flavored",
+        "quantity": 3,
+        "roast": "dark",
+        "type": "regular"
+    }, {
+        "region": "latin america",
+        "category": "coffee",
+        "price": 40,
+        "name": "Espresso Roast Espresso Verismo Pods",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "blonde",
+        "type": "decaffinated"
+    }, {
+        "region": "multi",
+        "category": "coffee",
+        "price": 50,
+        "name": "Sumatra K-Cup Pods",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "medium",
+        "type": "regular"
+    }, {
+        "region": "multi",
+        "category": "coffee",
+        "price": 50,
+        "name": "Starbucks Caffè Verona K-Cup Pods",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "medium",
+        "type": "regular"
+    }, {
+        "region": "latin america",
+        "category": "coffee",
+        "price": 40,
+        "name": "Starbucks VIA Ready Brew French Roast",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "blonde",
+        "type": "decaffinated"
+    }, {
+        "region": "asia-pacific",
+        "category": "coffee",
+        "price": 20,
+        "name": "Starbucks Pike Place Roast K-Cup Pods",
+        "flavor": "flavored",
+        "quantity": 3,
+        "roast": "dark",
+        "type": "regular"
+    }, {
+        "region": "latin america",
+        "category": "coffee",
+        "price": 40,
+        "name": "Pike Place Roast Brewed Coffee Verismo Pods",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "blonde",
+        "type": "decaffinated"
+    }, {
+        "region": "multi",
+        "category": "coffee",
+        "price": 50,
+        "name": "Starbucks Caffè Verona Brewed Coffee Verismo Pods",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "medium",
+        "type": "regular"
+    }, {
+        "region": "multi",
+        "category": "coffee",
+        "price": 50,
+        "name": "Starbucks VIA Ready Brew Italian Roast",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "medium",
+        "type": "regular"
+    }, {
+        "region": "latin america",
+        "category": "coffee",
+        "price": 40,
+        "name": "Starbucks Espresso Roast, Whole Bean",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "blonde",
+        "type": "decaffinated"
+    }, {
+        "region": "multi",
+        "category": "coffee",
+        "price": 50,
+        "name": "Caffè Verona Brewed Coffee Verismo Pods",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "medium",
+        "type": "regular"
+    }, {
+        "region": "multi",
+        "category": "coffee",
+        "price": 50,
+        "name": "Pike Place Roast Brewed Coffee Verismo Pods",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "medium",
+        "type": "regular"
+    }, {
+        "region": "latin america",
+        "category": "coffee",
+        "price": 40,
+        "name": "Starbucks VIA Ready Brew French Roast",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "blonde",
+        "type": "decaffinated"
+    }, {
+        "region": "multi",
+        "category": "coffee",
+        "price": 50,
+        "name": "Starbucks Caffé Verona Blend, Whole Bean",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "medium",
+        "type": "regular"
+    }, {
+        "region": "asia-pacific",
+        "category": "coffee",
+        "price": 20,
+        "name": "Starbucks Caffè Verona K-Cup Pods",
+        "flavor": "flavored",
+        "quantity": 3,
+        "roast": "dark",
+        "type": "regular"
+    }, {
+        "region": "latin america",
+        "category": "coffee",
+        "price": 40,
+        "name": "Milk Verismo Pods",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "blonde",
+        "type": "decaffinated"
+    }, {
+        "region": "multi",
+        "category": "coffee",
+        "price": 50,
+        "name": "Starbucks VIA Ready Brew Decaf Italian Roast",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "medium",
+        "type": "regular"
+    }, {
+        "region": "latin america",
+        "category": "coffee",
+        "price": 40,
+        "name": "Guatemala Antigua Espresso Verismo Pods",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "blonde",
+        "type": "decaffinated"
+    }, {
+        "region": "asia-pacific",
+        "category": "coffee",
+        "price": 20,
+        "name": "Starbucks Sumatra Brewed Coffee Verismo Pods",
+        "flavor": "flavored",
+        "quantity": 3,
+        "roast": "dark",
+        "type": "regular"
+    }, {
+        "region": "multi",
+        "category": "coffee",
+        "price": 50,
+        "name": "Starbucks Pike Place Roast, Whole Bean",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "medium",
+        "type": "regular"
+    }, {
+        "region": "latin america",
+        "category": "coffee",
+        "price": 40,
+        "name": "Starbucks House Blend, Whole Bean",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "blonde",
+        "type": "decaffinated"
+    }, {
+        "region": "multi",
+        "category": "coffee",
+        "price": 50,
+        "name": "Starbucks Guatemala Antigua Espresso Verismo Pods",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "medium",
+        "type": "regular"
+    }, {
+        "region": "multi",
+        "category": "coffee",
+        "price": 50,
+        "name": "Starbucks House Blend K-Cup Pods",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "medium",
+        "type": "regular"
+    }, {
+        "region": "latin america",
+        "category": "coffee",
+        "price": 40,
+        "name": "Starbucks VIA Ready Brew Decaf Italian Roast",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "blonde",
+        "type": "decaffinated"
+    }, {
+        "region": "multi",
+        "category": "coffee",
+        "price": 50,
+        "name": "Starbucks Colombia Brewed Coffee Verismo Pods",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "medium",
+        "type": "regular"
+    }, {
+        "region": "multi",
+        "category": "coffee",
+        "price": 50,
+        "name": "Starbucks French Roast K-Cup Pods",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "medium",
+        "type": "regular"
+    }, {
+        "region": "latin america",
+        "category": "coffee",
+        "price": 40,
+        "name": "Milk Verismo Pods",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "blonde",
+        "type": "decaffinated"
+    }, {
+        "region": "multi",
+        "category": "coffee",
+        "price": 50,
+        "name": "Starbucks Komodo Dragon Blend, Whole Bean",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "medium",
+        "type": "regular"
+    }, {
+        "region": "asia-pacific",
+        "category": "coffee",
+        "price": 20,
+        "name": "Starbucks Ethiopia Yirgacheffe Espresso Verismo Pods",
+        "flavor": "flavored",
+        "quantity": 3,
+        "roast": "dark",
+        "type": "regular"
+    }, {
+        "region": "latin america",
+        "category": "coffee",
+        "price": 40,
+        "name": "Starbucks House Blend Brewed Coffee Verismo Pods",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "blonde",
+        "type": "decaffinated"
+    }, {
+        "region": "multi",
+        "category": "coffee",
+        "price": 50,
+        "name": "Starbucks Sumatra, Whole Bean",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "medium",
+        "type": "regular"
+    }, {
+        "region": "multi",
+        "category": "coffee",
+        "price": 50,
+        "name": "Starbucks Veranda Blend Brewed Coffee Verismo Pods",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "medium",
+        "type": "regular"
+    }, {
+        "region": "latin america",
+        "category": "coffee",
+        "price": 40,
+        "name": "Starbucks Colombia Brewed Coffee Verismo Pods",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "blonde",
+        "type": "decaffinated"
+    }, {
+        "region": "asia-pacific",
+        "category": "coffee",
+        "price": 20,
+        "name": "Torrefazione Italia Napoli Blend, Ground",
+        "flavor": "flavored",
+        "quantity": 3,
+        "roast": "dark",
+        "type": "regular"
+    }, {
+        "region": "multi",
+        "category": "coffee",
+        "price": 50,
+        "name": "Starbucks French Roast, Ground",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "medium",
+        "type": "regular"
+    }, {
+        "region": "latin america",
+        "category": "coffee",
+        "price": 40,
+        "name": "Torrefazione Italia Perugia Blend, Whole Bean",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "blonde",
+        "type": "decaffinated"
+    }, {
+        "region": "multi",
+        "category": "coffee",
+        "price": 50,
+        "name": "Caffè Latte Verismo Pods",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "medium",
+        "type": "regular"
+    }, {
+        "region": "multi",
+        "category": "coffee",
+        "price": 50,
+        "name": "Starbucks Sumatra Brewed Coffee Verismo Pods",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "medium",
+        "type": "regular"
+    }, {
+        "region": "latin america",
+        "category": "coffee",
+        "price": 40,
+        "name": "House Blend Brewed Coffee Verismo Pods",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "blonde",
+        "type": "decaffinated"
+    }, {
+        "region": "multi",
+        "category": "coffee",
+        "price": 50,
+        "name": "Starbucks Reserve Roastery - Ongoing Subscription",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "medium",
+        "type": "regular"
+    }, {
+        "region": "multi",
+        "category": "coffee",
+        "price": 50,
+        "name": "Starbucks House Blend, Ground",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "medium",
+        "type": "regular"
+    }, {
+        "region": "latin america",
+        "category": "coffee",
+        "price": 40,
+        "name": "Starbucks VIA Veranda Blend",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "blonde",
+        "type": "decaffinated"
+    }, {
+        "region": "multi",
+        "category": "coffee",
+        "price": 50,
+        "name": "Starbucks Veranda Blend, Whole Bean",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "medium",
+        "type": "regular"
+    }, {
+        "region": "asia-pacific",
+        "category": "coffee",
+        "price": 20,
+        "name": "House Blend Portion Packs",
+        "flavor": "flavored",
+        "quantity": 3,
+        "roast": "dark",
+        "type": "regular"
+    }, {
+        "region": "latin america",
+        "category": "coffee",
+        "price": 40,
+        "name": "Starbucks Decaf Espresso Roast Espresso Verismo Pods",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "blonde",
+        "type": "decaffinated"
+    }, {
+        "region": "multi",
+        "category": "coffee",
+        "price": 50,
+        "name": "Starbucks VIA Caramel Flavored Iced Coffee",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "medium",
+        "type": "regular"
+    }, {
+        "region": "multi",
+        "category": "coffee",
+        "price": 50,
+        "name": "Starbucks Pike Place Roast, Ground",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "medium",
+        "type": "regular"
+    }, {
+        "region": "latin america",
+        "category": "coffee",
+        "price": 40,
+        "name": "Starbucks VIA Refreshers Strawberry Lemonade",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "blonde",
+        "type": "decaffinated"
+    }, {
+        "region": "asia-pacific",
+        "category": "coffee",
+        "price": 20,
+        "name": "Starbucks Ethiopia Yirgacheffe Espresso Verismo Pods",
+        "flavor": "flavored",
+        "quantity": 3,
+        "roast": "dark",
+        "type": "regular"
+    }, {
+        "region": "multi",
+        "category": "coffee",
+        "price": 50,
+        "name": "Starbucks Gold Coast Blend, Whole Bean",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "medium",
+        "type": "regular"
+    }, {
+        "region": "latin america",
+        "category": "coffee",
+        "price": 40,
+        "name": "Starbucks VIA Veranda Blend",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "blonde",
+        "type": "decaffinated"
+    }, {
+        "region": "multi",
+        "category": "coffee",
+        "price": 50,
+        "name": "Starbucks VIA Latte Vanilla Latte",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "medium",
+        "type": "regular"
+    }, {
+        "region": "multi",
+        "category": "coffee",
+        "price": 50,
+        "name": "Veranda Blend Brewed Coffee Verismo Pods",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "medium",
+        "type": "regular"
+    }, {
+        "region": "latin america",
+        "category": "coffee",
+        "price": 40,
+        "name": "Starbucks Pike Place Roast K-Cup Pods",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "blonde",
+        "type": "decaffinated"
+    }, {
+        "region": "multi",
+        "category": "coffee",
+        "price": 50,
+        "name": "Sumatra Portion Packs",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "medium",
+        "type": "regular"
+    }, {
+        "region": "multi",
+        "category": "coffee",
+        "price": 50,
+        "name": "Starbucks VIA Instant Caramel Latte",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "medium",
+        "type": "regular"
+    }, {
+        "region": "latin america",
+        "category": "coffee",
+        "price": 40,
+        "name": "Starbucks Italian Roast, Whole Bean",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "blonde",
+        "type": "decaffinated"
+    }, {
+        "region": "multi",
+        "category": "coffee",
+        "price": 50,
+        "name": "Starbucks Sumatra, Ground",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "medium",
+        "type": "regular"
+    }, {
+        "region": "asia-pacific",
+        "category": "coffee",
+        "price": 20,
+        "name": "Starbucks French Roast K-Cup Pods",
+        "flavor": "flavored",
+        "quantity": 3,
+        "roast": "dark",
+        "type": "regular"
+    }, {
+        "region": "latin america",
+        "category": "coffee",
+        "price": 40,
+        "name": "Starbucks Breakfast Blend, Whole Bean",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "blonde",
+        "type": "decaffinated"
+    }, {
+        "region": "multi",
+        "category": "coffee",
+        "price": 50,
+        "name": "Starbucks VIA Refreshers Valencia Orange",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "medium",
+        "type": "regular"
+    }, {
+        "region": "multi",
+        "category": "coffee",
+        "price": 50,
+        "name": "Decaf Espresso Roast Espresso Verismo Pods",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "medium",
+        "type": "regular"
+    }, {
+        "region": "latin america",
+        "category": "coffee",
+        "price": 40,
+        "name": "Pike Place Roast Portion Packs",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "blonde",
+        "type": "decaffinated"
+    }, {
+        "region": "asia-pacific",
+        "category": "coffee",
+        "price": 20,
+        "name": "Starbucks Caffé Verona Blend, Ground",
+        "flavor": "flavored",
+        "quantity": 3,
+        "roast": "dark",
+        "type": "regular"
+    }, {
+        "region": "multi",
+        "category": "coffee",
+        "price": 50,
+        "name": "Sumatra K-Cup Pods",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "medium",
+        "type": "regular"
+    }, {
+        "region": "latin america",
+        "category": "coffee",
+        "price": 40,
+        "name": "Starbucks VIA Latte Caffè Mocha",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "blonde",
+        "type": "decaffinated"
+    }, {
+        "region": "multi",
+        "category": "coffee",
+        "price": 50,
+        "name": "Starbucks Reserve Roastery - 3 Month Subscription",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "medium",
+        "type": "regular"
+    }, {
+        "region": "multi",
+        "category": "coffee",
+        "price": 50,
+        "name": "Starbucks VIA Instant White Chocolate Mocha Latte",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "medium",
+        "type": "regular"
+    }, {
+        "region": "latin america",
+        "category": "coffee",
+        "price": 40,
+        "name": "Starbucks Decaf Pike Place Roast, Whole Bean",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "blonde",
+        "type": "decaffinated"
+    }, {
+        "region": "multi",
+        "category": "coffee",
+        "price": 50,
+        "name": "Starbucks Veranda Blend, Ground",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "medium",
+        "type": "regular"
+    }, {
+        "region": "multi",
+        "category": "coffee",
+        "price": 50,
+        "name": "Decaf Pike Place Roast Brewed Coffee Verismo Pods",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "medium",
+        "type": "regular"
+    }, {
+        "region": "latin america",
+        "category": "coffee",
+        "price": 40,
+        "name": "Starbucks French Roast, Whole Bean",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "blonde",
+        "type": "decaffinated"
+    }, {
+        "region": "multi",
+        "category": "coffee",
+        "price": 50,
+        "name": "Starbucks House Blend K-Cup Pods",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "medium",
+        "type": "regular"
+    }, {
+        "region": "asia-pacific",
+        "category": "coffee",
+        "price": 20,
+        "name": "Decaf Caffè Verona,&nbsp;Whole Bean",
+        "flavor": "flavored",
+        "quantity": 3,
+        "roast": "dark",
+        "type": "regular"
+    }, {
+        "region": "latin america",
+        "category": "coffee",
+        "price": 40,
+        "name": "Starbucks Veranda Blend K-Cup Pods",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "blonde",
+        "type": "decaffinated"
+    }, {
+        "region": "multi",
+        "category": "coffee",
+        "price": 50,
+        "name": "Starbucks Reserve Vietnam Da Lat",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "medium",
+        "type": "regular"
+    }, {
+        "region": "multi",
+        "category": "coffee",
+        "price": 50,
+        "name": "Starbucks Breakfast Blend, Ground",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "medium",
+        "type": "regular"
+    }, {
+        "region": "latin america",
+        "category": "coffee",
+        "price": 40,
+        "name": "Starbucks Decaf Pike Place Roast Brewed Coffee Verismo Pods",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "blonde",
+        "type": "decaffinated"
+    }, {
+        "region": "asia-pacific",
+        "category": "coffee",
+        "price": 20,
+        "name": "Kenya, Whole Bean",
+        "flavor": "flavored",
+        "quantity": 3,
+        "roast": "dark",
+        "type": "regular"
+    }, {
+        "region": "multi",
+        "category": "coffee",
+        "price": 50,
+        "name": "Starbucks Reserve Sumatra Aceh",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "medium",
+        "type": "regular"
+    }, {
+        "region": "latin america",
+        "category": "coffee",
+        "price": 40,
+        "name": "Starbucks Decaf House Blend K-Cup Pods",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "blonde",
+        "type": "decaffinated"
+    }, {
+        "region": "multi",
+        "category": "coffee",
+        "price": 50,
+        "name": "French Roast Portion Packs",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "medium",
+        "type": "regular"
+    }, {
+        "region": "multi",
+        "category": "coffee",
+        "price": 50,
+        "name": "Guatemala Antigua, Whole Bean",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "medium",
+        "type": "regular"
+    }, {
+        "region": "latin america",
+        "category": "coffee",
+        "price": 40,
+        "name": "Starbucks VIA Ready Brew Colombia",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "blonde",
+        "type": "decaffinated"
+    }, {
+        "region": "multi",
+        "category": "coffee",
+        "price": 50,
+        "name": "Starbucks Reserve Cameroon Mt. Oku",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "medium",
+        "type": "regular"
+    }, {
+        "region": "multi",
+        "category": "coffee",
+        "price": 50,
+        "name": "Starbucks Decaf Sumatra, Whole Bean",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "medium",
+        "type": "regular"
+    }, {
+        "region": "latin america",
+        "category": "coffee",
+        "price": 40,
+        "name": "Starbucks Organic Yukon Blend, Whole Bean",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "blonde",
+        "type": "decaffinated"
+    }, {
+        "region": "multi",
+        "category": "coffee",
+        "price": 50,
+        "name": "Starbucks Decaf House Blend K-Cup Pods",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "medium",
+        "type": "regular"
+    }, {
+        "region": "asia-pacific",
+        "category": "coffee",
+        "price": 20,
+        "name": "Verismo Caramel Macchiato Kit",
+        "flavor": "flavored",
+        "quantity": 3,
+        "roast": "dark",
+        "type": "regular"
+    }, {
+        "region": "latin america",
+        "category": "coffee",
+        "price": 40,
+        "name": "Ethiopia, Whole Bean",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "blonde",
+        "type": "decaffinated"
+    }, {
+        "region": "multi",
+        "category": "coffee",
+        "price": 50,
+        "name": "Caffè Verona Portion Packs",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "medium",
+        "type": "regular"
+    }, {
+        "region": "multi",
+        "category": "coffee",
+        "price": 50,
+        "name": "Sumatra K-Cup Pods",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "medium",
+        "type": "regular"
+    }, {
+        "region": "latin america",
+        "category": "coffee",
+        "price": 40,
+        "name": "Starbucks Decaf Espresso Roast, Whole Bean",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "blonde",
+        "type": "decaffinated"
+    }, {
+        "region": "asia-pacific",
+        "category": "coffee",
+        "price": 20,
+        "name": "Decaf Pike Place Roast Portion Packs",
+        "flavor": "flavored",
+        "quantity": 3,
+        "roast": "dark",
+        "type": "regular"
+    }, {
+        "region": "multi",
+        "category": "coffee",
+        "price": 50,
+        "name": "Starbucks Caffè Latte Verismo Pods",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "medium",
+        "type": "regular"
+    }, {
+        "region": "latin america",
+        "category": "coffee",
+        "price": 40,
+        "name": "Verismo White Chocolate Kit",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "blonde",
+        "type": "decaffinated"
+    }, {
+        "region": "multi",
+        "category": "coffee",
+        "price": 50,
+        "name": "Veranda Blend Portion Packs",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "medium",
+        "type": "regular"
+    }, {
+        "region": "multi",
+        "category": "coffee",
+        "price": 50,
+        "name": "Fair Trade Certified Cafè Estima Blend, Whole Bean",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "medium",
+        "type": "regular"
+    }, {
+        "region": "latin america",
+        "category": "coffee",
+        "price": 40,
+        "name": "Starbucks Single-Origin Coffee Variety Pack",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "blonde",
+        "type": "decaffinated"
+    }, {
+        "region": "multi",
+        "category": "coffee",
+        "price": 50,
+        "name": "Starbucks Caramel K-Cup Pods",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "medium",
+        "type": "regular"
+    }, {
+        "region": "multi",
+        "category": "coffee",
+        "price": 50,
+        "name": "Starbucks Medium Roast Coffee Variety Pack",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "medium",
+        "type": "regular"
+    }, {
+        "region": "latin america",
+        "category": "coffee",
+        "price": 40,
+        "name": "Starbucks Puerto Rico, Whole Bean",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "blonde",
+        "type": "decaffinated"
+    }, {
+        "region": "multi",
+        "category": "coffee",
+        "price": 50,
+        "name": "Starbucks Decaf Pike Place Roast, Ground",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "medium",
+        "type": "regular"
+    }, {
+        "region": "asia-pacific",
+        "category": "coffee",
+        "price": 20,
+        "name": "Starbucks Veranda Blend K-Cup Pods",
+        "flavor": "flavored",
+        "quantity": 3,
+        "roast": "dark",
+        "type": "regular"
+    }, {
+        "region": "latin america",
+        "category": "coffee",
+        "price": 40,
+        "name": "Torrefazione Italia Montecatini Decaf Blend, Ground",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "blonde",
+        "type": "decaffinated"
+    }, {
+        "region": "multi",
+        "category": "coffee",
+        "price": 50,
+        "name": "Starbucks Reserve Roastery - 12 Month Subscription",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "medium",
+        "type": "regular"
+    }, {
+        "region": "multi",
+        "category": "coffee",
+        "price": 50,
+        "name": "Starbucks Bright Sky Blend K-Cup Pods",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "medium",
+        "type": "regular"
+    }, {
+        "region": "latin america",
+        "category": "coffee",
+        "price": 40,
+        "name": "Starbucks Reserve Roastery - 6 Month Subscription",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "blonde",
+        "type": "decaffinated"
+    }, {
+        "region": "asia-pacific",
+        "category": "coffee",
+        "price": 20,
+        "name": "Starbucks Pike Place Roast K-Cup Pods",
+        "flavor": "flavored",
+        "quantity": 3,
+        "roast": "dark",
+        "type": "regular"
+    }, {
+        "region": "multi",
+        "category": "coffee",
+        "price": 50,
+        "name": "Starbucks Vanilla K-Cup Pods",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "medium",
+        "type": "regular"
+    }, {
+        "region": "latin america",
+        "category": "coffee",
+        "price": 40,
+        "name": "Starbucks Willow Blend, Whole Bean",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "blonde",
+        "type": "decaffinated"
+    }, {
+        "region": "multi",
+        "category": "coffee",
+        "price": 50,
+        "name": "Starbucks Mocha K-Cup Pods",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "medium",
+        "type": "regular"
+    }, {
+        "region": "multi",
+        "category": "coffee",
+        "price": 50,
+        "name": "Tazo Awake English Breakfast K-Cup Pods",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "medium",
+        "type": "regular"
+    }, {
+        "region": "latin america",
+        "category": "coffee",
+        "price": 40,
+        "name": "Starbucks French Roast K-Cup Pods",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "blonde",
+        "type": "decaffinated"
+    }, {
+        "region": "multi",
+        "category": "coffee",
+        "price": 50,
+        "name": "Starbucks House Blend K-Cup Pods",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "medium",
+        "type": "regular"
+    }, {
+        "region": "multi",
+        "category": "coffee",
+        "price": 50,
+        "name": "Starbucks Dark Roast Coffee Variety Pack",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "medium",
+        "type": "regular"
+    }, {
+        "region": "latin america",
+        "category": "coffee",
+        "price": 40,
+        "name": "Fair Trade Certified  Cafè Estima Blend Portion Packs",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "blonde",
+        "type": "decaffinated"
+    }, {
+        "region": "multi",
+        "category": "coffee",
+        "price": 50,
+        "name": "Starbucks K-Cup Pods Sampler - French Roast &amp; Sumatra",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "medium",
+        "type": "regular"
+    }, {
+        "region": "asia-pacific",
+        "category": "coffee",
+        "price": 20,
+        "name": "Starbucks K-Cup Pods Sampler - Pike Place Roast &amp; Caffè Verona",
+        "flavor": "flavored",
+        "quantity": 3,
+        "roast": "dark",
+        "type": "regular"
+    }, {
+        "region": "latin america",
+        "category": "coffee",
+        "price": 40,
+        "name": "Verismo Vanilla Latte Kit",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "blonde",
+        "type": "decaffinated"
+    }, {
+        "region": "multi",
+        "category": "coffee",
+        "price": 50,
+        "name": "Starbucks Caramel K-Cup Pods",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "medium",
+        "type": "regular"
+    }, {
+        "region": "multi",
+        "category": "coffee",
+        "price": 50,
+        "name": "Starbucks Reserve Decaf Costa Rica Bella Vista F.W. Tres Rios",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "medium",
+        "type": "regular"
+    }, {
+        "region": "latin america",
+        "category": "coffee",
+        "price": 40,
+        "name": "Starbucks Caffè Verona K-Cup Pods",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "blonde",
+        "type": "decaffinated"
+    }, {
+        "region": "asia-pacific",
+        "category": "coffee",
+        "price": 20,
+        "name": "Verismo Mocha Kit",
+        "flavor": "flavored",
+        "quantity": 3,
+        "roast": "dark",
+        "type": "regular"
+    }, {
+        "region": "multi",
+        "category": "coffee",
+        "price": 50,
+        "name": "Sumatra K-Cup Pods",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "medium",
+        "type": "regular"
+    }, {
+        "region": "latin america",
+        "category": "coffee",
+        "price": 40,
+        "name": "Starbucks K-Cup Pods Sampler - French Roast &amp; Caffè Verona",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "blonde",
+        "type": "decaffinated"
+    }, {
+        "region": "multi",
+        "category": "coffee",
+        "price": 50,
+        "name": "Starbucks K-Cup Pods Sampler - French Roast &amp; Pike Place Roast",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "medium",
+        "type": "regular"
+    }, {
+        "region": "multi",
+        "category": "coffee",
+        "price": 50,
+        "name": "Starbucks K-Cup Pods Sampler - House Blend &amp; Pike Place Roast",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "medium",
+        "type": "regular"
+    }, {
+        "region": "latin america",
+        "category": "coffee",
+        "price": 40,
+        "name": "Starbucks Vanilla K-Cup Pods",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "blonde",
+        "type": "decaffinated"
+    }, {
+        "region": "multi",
+        "category": "coffee",
+        "price": 50,
+        "name": "Starbucks Mocha K-Cup Pods",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "medium",
+        "type": "regular"
+    }, {
+        "region": "multi",
+        "category": "coffee",
+        "price": 50,
+        "name": "Starbucks Bright Sky Blend K-Cup Pods",
+        "flavor": "flavored",
+        "quantity": 5,
+        "roast": "medium",
+        "type": "regular"
+    }];
+}]);
+
+
 
 
 
