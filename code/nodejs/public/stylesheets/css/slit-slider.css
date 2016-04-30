@@ -155,14 +155,14 @@
 }
 
 .bg-img-1 {
-	background-image: url(../img/slider/banner.jpg);
+	background-image: url(../../img/slider/banner.jpg);
 /*background-image: url(../img/slider/Starbucks_Coffee_Cup_Splash_Photography_HD_Wallpaper-Vvallpaper.Net.jpg);*/
 }
 .bg-img-2 {
-background-image: url(../img/slider/affinity.jpeg);
+background-image: url(../../img/slider/affinity.jpeg);
 }
 .bg-img-3 {
-background-image: url(../img/slider/cinelli.jpeg);
+background-image: url(../../img/slider/cinelli.jpeg);
 }
 
 

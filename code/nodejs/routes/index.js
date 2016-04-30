@@ -5,7 +5,7 @@
 
 exports.index = function(req, res){
   if(req.session.data)
-  res.render('home');
+  res.render('home1');
   else
   res.render('login');
 };

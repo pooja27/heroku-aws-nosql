@@ -60,7 +60,7 @@ angular.module('ui.splash', ['ui.bootstrap', 'ngAnimate'])
           backdrop: false,
           scope: scope,
           templateUrl: 'splash/content.html',
-          windowTemplateUrl: 'splash/index.html'
+          windowTemplateUrl: 'splash/home1.ejs'
         });
         return $uibModal.open(opts);
       }
@@ -70,7 +70,7 @@ angular.module('ui.splash', ['ui.bootstrap', 'ngAnimate'])
 .run([
   '$templateCache',
   function ($templateCache) {
-    $templateCache.put('splash/index.html',
+    $templateCache.put('splash/home1.ejs',
       '<section modal-render="{{$isRendered}}" class="splash" modal-in-class="splash-open" ng-style="{\'z-index\': 1000, display: \'block\'}" ng-click="close($event)">' +
       '  <div class="splash-inner" ng-transclude></div>' +
       '</section>'
