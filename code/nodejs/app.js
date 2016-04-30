@@ -37,7 +37,9 @@ if ('development' == app.get('env')) {
 app.get('/', routes.index);
 app.post('/signup',userRegisteration.signup);
 app.post('/login',userRegisteration.login);
-app.get('/allProducts',products.show);
+app.get('/allCoffee',products.coffees);
+app.get('/alltea',products.teas);
+app.get('/allDrinkware',products.drinkwares);
 //app.post('/cart',product.cart);
 //app.post('/bill',product.bill);
 
