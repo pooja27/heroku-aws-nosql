@@ -76,12 +76,13 @@ angular.module('ui.splash', ['ui.bootstrap', 'ngAnimate'])
       '</section>'
     );
     $templateCache.put('splash/content.html',
-	'<form id="registrationform" name="regform" ng-click="$register()">'+
+	'<form id="registrationform" name="regform" action="\homescreen\\signup">'+
       '<div class="splash-content text-center">' +
       '<h1 ng-bind="title"></h1>' +
       '<p class="lead" ng-bind="message"></p>' +
-	  'Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="uname" style="background-color : #000000; border-radius:5px;" /><br><br>'+
-	  'Password:&nbsp;&nbsp;&nbsp;&nbsp; <input type="password" id="password" style="background-color : #000000; border-radius:5px;" /><br><br>'+
+	  'First Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="uname" style="background-color : #000000; border-radius:5px;" /><br><br>'+
+    'Last Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="uname" style="background-color : #000000; border-radius:5px;" /><br><br>'+
+    'Password:&nbsp;&nbsp;&nbsp;&nbsp; <input type="password" id="password" style="background-color : #000000; border-radius:5px;" /><br><br>'+
 	  'Email ID:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="email" id="email" style="background-color : #000000; border-radius:5px;" /><br><br>'+
       '<button class="btn btn-lg btn-outline" ng-bind="btnText || \'Register\'" ></button>' +
       '</div>'+
