@@ -15,7 +15,7 @@ import (
 )
 
 const (
-    Database = "db_test"
+    Database = "starbucks"
 )
 
 /* ------- Debugging variables ------- */
@@ -35,6 +35,12 @@ var debugModeActivated bool
 
 //struct to store in Inventory collection
 type Inventory struct {
+	Item_ID string	`json:"item_id"	bson:"item_id"`
+	Stock		int64		`json:"stock"		bson:"stock"`
+}
+
+//struct to store in Inventory collection
+type Cart struct {
 	Item_ID string	`json:"item_id"	bson:"item_id"`
 	Stock		int64		`json:"stock"		bson:"stock"`
 }
@@ -221,17 +227,15 @@ func (rc ResponseController) GetAllDrinkware(w http.ResponseWriter, r *http.Requ
 // // Login serves the Login GET request
 // func (rc ResponseController) GetAllProducts(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 // 	fmt.Println("GET Request product: allProducts")
-//
-// 	resp, err := getAllProductsDB(rc)
-// 	if err != nil {
-// 		sendErrorResponse(w,err,404)
-// 		return
-// 	}
-//
-// 	jsonOut, _ := json.Marshal(resp)
-// 	httpResponse(w, jsonOut, 200)
-// 	fmt.Println("Response:", string(jsonOut), " 200 OK")
-// }
+
+ //	resp, err := getAllProductsDB(rc)
+ //	if err != nil { 		sendErrorResponse(w,err,404)
+ //		return
+ //	}
+ //	jsonOut, _ := json.Marshal(resp)
+ //	httpResponse(w, jsonOut, 200)
+ //	fmt.Println("Response:", string(jsonOut), " 200 OK")
+ //}
 
 // // Login serves the Login GET request
 // func (rc ResponseController) GetProduct(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
@@ -580,6 +584,7 @@ func main() {
 	// r.POST("/mongoserver", rc.CreateDocument)
 	// r.POST("/mongoserver/product", rc.SaveProduct)
 	r.POST("/mongoserver/signup", rc.Signup)
+	r.POST("/mongoserver/cart", rc.Signup)
 	// r.DELETE("/mongoserver/:id", rc.DeleteDocument)
 	// r.PUT("/mongoserver/:id", rc.UpdateDocument)
 	fmt.Println("Server is Ready !")
