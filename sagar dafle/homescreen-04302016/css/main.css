@@ -509,7 +509,7 @@ h1.navbar-brand {
 /* Project laughtbox setup */
 
 .fancybox-item.fancybox-close {
-    background: url("../../img/icons/close.png") no-repeat scroll 0 0 transparent;
+    background: url("../img/icons/close.png") no-repeat scroll 0 0 transparent;
     height: 50px;
     right: 0;
     top: 0;
@@ -517,14 +517,14 @@ h1.navbar-brand {
 }
 
 .fancybox-next span {
-    background: url("../../img/right.png") no-repeat scroll center center #009ee3;
+    background: url("../img/right.png") no-repeat scroll center center #009ee3;
     height: 50px;
     width: 50px;
     right: 0;
 }
 
 .fancybox-prev span {
-    background: url("../../img/left.png") no-repeat scroll center center #009ee3;
+    background: url("../img/left.png") no-repeat scroll center center #009ee3;
     height: 50px;
     width: 50px;
     left: 0;
@@ -750,7 +750,7 @@ ul.external li a:hover {
 
 
 #testimonials {
-    background-image: url(../../img/parallax/testimonial.jpg);
+    background-image: url(../img/parallax/testimonial.jpg);
     padding: 0;
     color: #fff;
 }
@@ -784,7 +784,7 @@ ul.external li a:hover {
 }
 
 .testimonial-item > div:before {
-    background-image: url("../../img/icons/quotes.png");
+    background-image: url("../img/icons/quotes.png");
     background-repeat: no-repeat;
     bottom: 127px;
     height: 33px;
@@ -794,7 +794,7 @@ ul.external li a:hover {
 }
 
 .testimonial-item > div:after {
-    background-image: url("../../img/icons/quotes.png");
+    background-image: url("../img/icons/quotes.png");
     background-position: -58px 0;
     background-repeat: no-repeat;
     bottom: -50px;
@@ -920,14 +920,14 @@ ul.external li a:hover {
 ==================================================================*/
 
 #social {
-     background-image: url(../../img/slider/banner.jpg);
+     background-image: url(../img/slider/banner.jpg);
 
 /* background-image: url(../img/slider/Starbucks_Coffee_Cup_Splash_Photography_HD_Wallpaper-Vvallpaper.Net.jpg);*/
  padding: 0;
 }
 
 #social .overlay {
- background: url("../../img/slide_bg.png") repeat scroll 0 0 transparent;
+ background: url("../img/slide_bg.png") repeat scroll 0 0 transparent;
  padding: 100px 0 120px;
 }
 
@@ -1476,7 +1476,7 @@ textarea.form-control {
 
 
 #coffee-list {
-    background-image: url(../../img/parallax/testimonial.jpg);
+    background-image: url(../img/parallax/testimonial.jpg);
     padding: 0;
     color: #fff;
 }
@@ -1510,7 +1510,7 @@ textarea.form-control {
 }
 
 .testimonial-item > div:before {
-    background-image: url("../../img/icons/quotes.png");
+    background-image: url("../img/icons/quotes.png");
     background-repeat: no-repeat;
     bottom: 127px;
     height: 33px;
@@ -1520,7 +1520,7 @@ textarea.form-control {
 }
 
 .testimonial-item > div:after {
-    background-image: url("../../img/icons/quotes.png");
+    background-image: url("../img/icons/quotes.png");
     background-position: -58px 0;
     background-repeat: no-repeat;
     bottom: -50px;
@@ -1562,7 +1562,7 @@ textarea.form-control {
 
 
 #tea-list {
-    background-image: url(../../img/parallax/testimonial.jpg);
+    background-image: url(../img/parallax/testimonial.jpg);
     padding: 0;
     color: #fff;
 }
@@ -1596,7 +1596,7 @@ textarea.form-control {
 }
 
 .testimonial-item > div:before {
-    background-image: url("../../img/icons/quotes.png");
+    background-image: url("../img/icons/quotes.png");
     background-repeat: no-repeat;
     bottom: 127px;
     height: 33px;
@@ -1606,7 +1606,7 @@ textarea.form-control {
 }
 
 .testimonial-item > div:after {
-    background-image: url("../../img/icons/quotes.png");
+    background-image: url("../img/icons/quotes.png");
     background-position: -58px 0;
     background-repeat: no-repeat;
     bottom: -50px;
