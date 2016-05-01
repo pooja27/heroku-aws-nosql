@@ -2,6 +2,8 @@ ps -eaf|grep mongod
 sudo service mongod status
 sudo service mongod start
 
+mongod --port 27017 --dbpath /data/db/ --replSet rs0
+
 Queries:
 show dbs | Print a list of all databases on the server.
 use db_test | Switch current database to <db>. The mongo shell variable db is set to the current database.
@@ -10,4 +12,4 @@ db.users.find().pretty()
 
 db.createCollection("inventory")
 
-db.inventory.insert( { item_id: "coffee_9", stock: 5 } )
+db.cart.insert( { userid: "tuser@gmail.com", item_ids: ["tea_9", "coffee_9"] } )
