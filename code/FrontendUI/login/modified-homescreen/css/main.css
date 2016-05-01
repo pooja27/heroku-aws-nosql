@@ -2,10 +2,8 @@
 *
 * ---------------------------------------------------------------------------
 *
-* Template : Blue - A One-Page HTML Portfolio/Business Template
-* Author : Muhammad Morshd
-* Author URI : http://morsheds.com
-*
+* Source : Blue - A One-Page HTML Portfolio/Business Template
+* Edited-by : Sagar Dafle
 * --------------------------------------------------------------------------- 
 *
 */
@@ -13,6 +11,19 @@
 /* =================================== */
 /*	Basic Style 
 /* =================================== */
+#step-count,#step-count-tea{
+    border-radius:5px;
+}
+#fig-caption,#price-lb,#fig-caption-tea,#price-lb-tea{
+    color: #000;
+}
+#individual-product {
+   background-color: #ffffff
+}
+
+#individual-products-teas{
+    background-color: #ffffff
+}
 
 body {
     background-color: #fff;
@@ -64,6 +75,9 @@ main > section {
     text-transform: uppercase;
 }
 
+.product-data{
+    margin-left: 35px;
+}
 .btn-blue {
     background-color: rgba(0,158,227, 0.78);
     box-shadow: 0 -2px 0 rgba(0, 0, 0, 0.15) inset;
@@ -72,7 +86,9 @@ main > section {
 }
 
 .btn-red {
-    background-color: rgb(255,255,0);
+    background-color: #245557;
+    border-radius: 10px;
+   /* background-color: rgb(255,255,0); */
     box-shadow: 0 -2px 0 rgba(0, 0, 0, 0.15) inset;
     padding: 15px 55px;
     color: #fff;

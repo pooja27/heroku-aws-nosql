@@ -1,27 +1,10 @@
-/*
-var app = angular.module('myApp', []);
-app.controller("Controller", ['$scope', function($scope){
-
-    $scope.population = 7000;
-    $scope.countries = [
-        {name: 'France', population: 63.1},
-        {name: 'United Kingdom', population: 63.8},
-        {name: 'India', population: 64.8},
-        {name: 'Egypt', population: 66.8},
-        {name: 'Germany', population: 63.8},
-        {name: 'Switzerland', population: 62.8},
-        {name: 'Australia', population: 68.8},
-        {name: 'Zimbabwe', population: 21.8},
-        {name: 'RSA', population: 51.8}
-    ];
-
-
-}]);
-*/
-
+/**
+ * JSON FOR COFFEE-TEA-DRINKWARES DATA
+ */
 
 var app = angular.module('myApp', []);
 app.controller("Controller", ['$scope', function($scope) {
+
     $scope.coffecataloge = [{
         "region": "latin america",
         "category": "coffee",
@@ -1247,14 +1230,130 @@ app.controller("Controller", ['$scope', function($scope) {
         "roast": "medium",
         "type": "regular"
     }];
+
+
+    $scope.teacataloge = [
+        {
+            "category":"tea",
+            "price":50,
+            "count":12,
+            "item_id":"tea_1",
+            "name":"Teavana Peach Tranquility Full-Leaf Sachets",
+            "brand":"tazo",
+            "type":"ice tea",
+            "tea_form":"K-Cup Pods"
+        },
+        {
+            "category":"tea",
+            "price":8.55,
+            "count":12,
+            "item_id":"tea_2",
+            "name":"Teavana Oprah Cinnamon Chai Full-Leaf Sachets",
+            "brand":"teavana",
+            "type":"black tea",
+            "tea_form":"tea bags"
+        },
+        {
+            "category":"tea",
+            "price":30,
+            "count":100,
+            "item_id":"tea_3",
+            "name":"Teavana Youthberry Full-Leaf Sachets",
+            "brand":"tazo",
+            "type":"chai tea",
+            "tea_form":"tea bags"
+        },
+        {
+            "category":"tea",
+            "price":50,
+            "count":12,
+            "item_id":"tea_4",
+            "name":"Teavana Emperor's Clouds &amp; Mist Full-Leaf Sachets",
+            "brand":"teavana",
+            "type":"green tea",
+            "tea_form":"K-Cup Pods"
+        },
+        {
+            "category":"tea",
+            "price":50,
+            "count":12,
+            "item_id":"tea_5",
+            "name":"Teavana Mint Majesty Full-Leaf Sachets",
+            "brand":"tazo",
+            "type":"ice tea",
+            "tea_form":"K-Cup Pods"
+        },
+        {
+            "category":"tea",
+            "price":50,
+            "count":12,
+            "item_id":"tea_6",
+            "name":"Teavana Jade Citrus Mint Full-Leaf Sachets",
+            "brand":"tazo",
+            "type":"ice tea",
+            "tea_form":"K-Cup Pods"
+        },
+        {
+            "category":"tea",
+            "price":8.55,
+            "count":12,
+            "item_id":"tea_7",
+            "name":"Teavana Royal English Breakfast Full-Leaf Sachets",
+            "brand":"teavana",
+            "type":"black tea",
+            "tea_form":"tea bags"
+        },
+        {
+            "category":"tea",
+            "price":30,
+            "count":100,
+            "item_id":"tea_8",
+            "name":"Tazo Chai Tea Latte Concentrate",
+            "brand":"tazo",
+            "type":"chai tea",
+            "tea_form":"tea bags"
+        },
+        {
+            "category":"tea",
+            "price":50,
+            "count":12,
+            "item_id":"tea_9",
+            "name":"Tazo Zen Iced Green Filterbag Tea, 24 count",
+            "brand":"teavana",
+            "type":"green tea",
+            "tea_form":"K-Cup Pods"
+        },
+        {
+            "category":"tea",
+            "price":50,
+            "count":12,
+            "item_id":"tea_10",
+            "name":"Tazo Iced Black Filterbag Tea, 20 count",
+            "brand":"tazo",
+            "type":"ice tea",
+            "tea_form":"K-Cup Pods"
+        },
+        {
+            "category":"tea",
+            "price":50,
+            "count":12,
+            "item_id":"tea_11",
+            "name":"Tazo Tropic Black Iced Tea Bag, 24 count",
+            "brand":"tazo",
+            "type":"ice tea",
+            "tea_form":"K-Cup Pods"
+        },
+        {
+            "category":"tea",
+            "price":8.55,
+            "count":12,
+            "item_id":"tea_12",
+            "name":"Tazo Iced Passion Filterbag Tea, 6 count",
+            "brand":"teavana",
+            "type":"black tea",
+            "tea_form":"tea bags"
+        }];
 }]);
-
-
-
-
-
-
-/* ========================================================================= */
 /*	Preloader
 /* ========================================================================= */
 

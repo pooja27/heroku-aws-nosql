@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html lang="en" class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -93,7 +94,7 @@
         End Fixed Navigation
         ==================================== -->
 		
-		<main class="site-content" role="main">
+		<main ng-app= "myApp" ng-controller="Controller" class="site-content" role="main">
 		
         <!--
         Home Slider
@@ -356,7 +357,7 @@
 								<img src="img/portfolio/item6.jpg" class="img-responsive" alt="Lorem Ipsum is simply dummy text of the printing and typesetting ndustry. ">
 								<figcaption class="mask">
 									<h3>Wall street</h3>
-									<p>Lorem Ipsum is simply dummy text of the printing and typesetting ndustry. </p>
+									<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
 								</figcaption>
 								<ul class="external">
 									<li><a class="fancybox" title="Wall street 6" data-fancybox-group="works" href="img/portfolio/item6.jpg"><i class="fa fa-search"></i></a></li>
@@ -371,72 +372,42 @@
 			<!-- end portfolio section -->
 
 			<!-- Coffee-list -->
-
-
 			<section id="coffee-list" class="parallax">
 				<div class="overlay">
 					<div class="container">
 						<div class="row">
-
 							<div class="sec-title text-center white wow animated fadeInDown">
 								<h2>Buy your favourite coffee now</h2>
 							</div>
-
-							<div ng-app="myApp" ng-controller="Controller">
-								<script type="text/javascript" >
-									var counter =1;
-									var row_number = 1;
-									var temp = "col-md-4"  + row_number;
-
-								</script>
+							<div>
+                                <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 								<div class="row">
                                     <div class= "col-md-4"  ng-repeat="coffeedata in coffecataloge">
-									<!-- <script type="text/javascript" > alert(counter); if(counter%3 == 0) ++row_number; </script> -->
-                                    <div id="product-box" style="width:600px;height:250px" >
-                                        <div style="width:350px;height:250px;border:1px solid #000;">
-                                            <div>{{ coffeedata.name }}</div>
-                                            <div>In Stock : {{ coffeedata.quantity }}</div>
-                                            <div>Price: {{ coffeedata.price }}</div> <br><br><br>
-                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <div id="product-box" style="width:620px;height:390px;" >
+                                        <div id ="individual-products"style="width:350px;height:395px;border:1px solid ;border-radius: 15px; background-color:#ffffff">
+                                            <div>&nbsp;&nbsp;&nbsp;
+                                                <figure>
+													<input id="hiddenattr" type="hidden" name="country" value="{{($index+1)%9}}" ;>
+                                                    <img id="product-images" style="margin-top:20px;margin-left:30px;width:200px;height:190px"/>
+                                                  <script type="text/javascript" >
+														 var hiddenvariable = document.getElementById("hiddenattr").value;
+                                                         var imagepath = "img/products/coffee/coffee-"+hiddenvariable+".jpg" ;
+                                                         document.getElementById("product-images").src = imagepath;
+                                                    </script>
+												<div class="product-data"><figcaption id="fig-caption">{{ coffeedata.name | limitTo: 30 }}{{coffeedata.name > 30 ? '...' : ''}}</figcaption></div>
+                                                </figure>
+                                            </div>
+                                            <input class="product-data" id="step-count"style="color:black" type="number" name="points" min="0" max="100">
+                                            <div class="product-data" id ="price-lb" >${{ coffeedata.price }} / {{coffeedata.quantity}} lb</div>
+											<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                             <a href="#add-to-cart" class="btn btn-red btn-effect">Add to Cart</a>
                                         </div>
-
                                     </div>
-									<br>
+									<br><br>
 								</div>
                                 </div>
-								<!--<li ng-repeat="country in countries">
-									{{country.name}} has population of {{country.population}}
-								</li>  -->
 								<hr>
-								World's population: {{population}} millions
 							</div>
-
-
-							<!--<div id="testimonial" class=" wow animated fadeInUp">
-								<div class="testimonial-item text-center">
-									<img src="img/rsz_1coffee-cup-bowl-with-grains-images.jpg" alt="Our Clients">
-									<div class="clearfix">
-										<span>Cafe Americano</span>
-										<p>Espresso shots are topped with hot water to produce a light layer of crema. The result is this wonderfully rich cup with depth and nuance.</p>
-									</div>
-								</div>
-								<div class="testimonial-item text-center">
-									<img src="img/member-1.jpg" alt="Our Clients">
-									<div class="clearfix">
-										<span>Katty Flower</span>
-										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-									</div>
-								</div>
-								<div class="testimonial-item text-center">
-									<img src="img/member-1.jpg" alt="Our Clients">
-									<div class="clearfix">
-										<span>Katty Flower</span>
-										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-									</div>
-								</div>
-							</div> -->
-
 						</div>
 					</div>
 				</div>
@@ -452,31 +423,37 @@
 						<div class="row">
 
 							<div class="sec-title text-center white wow animated fadeInDown">
-								<h2>Buy your favourite tea now</h2>
+								<h2>Grab your favorite Tea!</h2>
 							</div>
 
-							<div id="testimonial" class=" wow animated fadeInUp">
-								<div class="testimonial-item text-center">
-									<img src="img/rsz_1coffee-cup-bowl-with-grains-images.jpg" alt="Our Clients">
-									<div class="clearfix">
-										<span>Mango Black Tea Lemonade</span>
-										<p>Returning just in time for spring—our refreshing blend of premium black tea, flavors of juicy mango, passion fruit, and a splash of lemonade. An ideal balance of tart and sweet.</p>
+							<div>
+								<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+								<div class="row">
+									<div class= "col-md-4"  ng-repeat="teadata in teacataloge">
+										<div id="product-box-tea" style="width:620px;height:390px ;" >
+											<div id ="individual-products-teas"style="width:350px;height:395px;border:1px solid #ffffff;border-radius: 15px;">
+												<div>&nbsp;&nbsp;&nbsp;
+													<figure>
+														<input id="hiddenattrtea" type="hidden" name="country" value="{{($index+1)%9}}" ;>
+														<img id="product-images-tea" style="margin-top:20px;margin-left:30px;width:200px;height:190px"/>
+														<script type="text/javascript" >
+															var hiddenvariable = document.getElementById("hiddenattrtea").value;
+															var imagepath = "img/products/tea/tea-"+hiddenvariable+".jpg" ;
+															document.getElementById("product-images-tea").src = imagepath;
+														</script>
+														<div class="product-data"><figcaption id="fig-caption-tea">{{ teadata.name | limitTo: 30 }}{{teadata.name > 30 ? '...' : ''}}</figcaption></div>
+													</figure>
+												</div>
+												<input class="product-data" id="step-count-tea"style="color:black" type="number" name="points" min="0" max="100">
+												<div class="product-data" id ="price-lb-tea" >${{ teadata.price }} / {{teadata.quantity}} lb</div>
+												<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+												<a href="#add-to-cart" class="btn btn-red btn-effect">Add to Cart</a>
+											</div>
+										</div>
+										<br><br>
 									</div>
 								</div>
-								<div class="testimonial-item text-center">
-									<img src="img/member-1.jpg" alt="Our Clients">
-									<div class="clearfix">
-										<span>Katty Flower</span>
-										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-									</div>
-								</div>
-								<div class="testimonial-item text-center">
-									<img src="img/member-1.jpg" alt="Our Clients">
-									<div class="clearfix">
-										<span>Katty Flower</span>
-										<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-									</div>
-								</div>
+								<hr>
 							</div>
 
 						</div>
@@ -708,6 +685,7 @@
 		<!-- Essential jQuery Plugins
 		================================================== -->
 		<!-- Main jQuery -->
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 		<script type="text/javascript" src="productCatalogueCoffee.json"></script>
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.0-rc.2/angular.min.js"></script>
         <script src="js/jquery-1.11.1.min.js"></script>

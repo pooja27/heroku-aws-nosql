@@ -2,4 +2,11 @@ Waffle Board : https://waffle.io/shubhamvadhera/cmpe281-teamproject
 Github : https://github.com/shubhamvadhera/cmpe281-teamproject
 My Github profile : https://github.com/sagardafle
 - This week , I added the required fields in the signup page and integrated the login-signup module with the node JS server.
-- Met with the team to discuss on the design of the homescreen and the REST endpoints to use. 
+- Met with the team to discuss on the design of the homescreen and the REST endpoints to use.
+- Developed the Homepage for Starbucks application using BootStrap, CSS3, HTML5 and some available themes over internet.
+- Developed the Catalogue page for the products-coffee,tea as well as the drinkware. Products are listed using angular JS modules.
+  Modules that were used are ng-repeat,ng-app and ng-controller.
+- Development of products page involved fetching the data from the JSON catalogue, displaying them in single page via angular, adding stylish css for the entire page and adding "add-to-cart" button.
+- Added the functionality to filter-out the products on each of the screen. User can filter the data by caffeine,Roast and/or region. 
+- Deployed the application on Heroku while pair-programming with the team member.
+- In the process to add features like "Login via facebook and/or Analytics or Statistics".Making use of Javascript charts to show analytics. 
