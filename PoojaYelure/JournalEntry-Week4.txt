@@ -1,0 +1,16 @@
+Week4:
+1. To setup mongod replica set, I tried using AWS template for an already created VPC.
+2. AWS couldnot complete the setup and the operation was rolled back. Tried this setup twice.
+3. Tried the second template provided by AWS with permissions for AWS to create its own VPC, that did not work too.
+4. Started to setup manually the replica set. Created a 3 node cluster and assigned public IPs. Configured them to listen on port 27017.
+5. Could not deploy the replica set, was facing issues with initial set up.
+6. 2. Inititally I was trying setting up a new micro instance and configure but that was taking longer and was a tedious task.
+7. I created an AMI with mongod installed on it, that saved a lot of time later.
+8. Later in the week, with changes in hostnames and config file for mongo, the setup was complete.
+9. Successfully deployed the replica set on AWS dataset.
+10. Migrated all the datasets from the local database onto the AWS datasets.
+11. Tested the queries for all CRUD operations and replication for the replica set.
+12. Testing partition tolerance with multiple scenarios, election not working fine.
+13. Had to set up an arbiter instance to resolve conflicts and help in election.
+14. Initial tests with send requests to primary/secondary for writing and reading work fine.
+14. Planning on spawning multiple secondary nodes to test thoroughly.
