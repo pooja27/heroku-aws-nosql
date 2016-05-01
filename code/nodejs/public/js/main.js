@@ -41,6 +41,21 @@ app.controller("Controller", ['$scope','$http', function($scope,$http) {
     },function(response){
         alert("Failure");
     });
+    $scope.addCart=function(item_id){
+        item={"item_id":item_id};
+        $http({
+              method: 'POST',url: '/addCart',
+          data: item
+            }).
+        then(function(response) {
+
+            console.log(response.data);
+           alert("Product added");
+
+        },function(response){
+            alert("Failure");
+        });
+    }
     //$scope.coffecataloge = [{
     //    "region": "latin america",
     //    "category": "coffee",

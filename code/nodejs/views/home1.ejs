@@ -398,7 +398,7 @@
                                             <div>In Stock : {{ coffeedata.quantity }}</div>
                                             <div>Price: {{ coffeedata.price }}</div> <br><br><br>
                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                            <a href="#add-to-cart" class="btn btn-red btn-effect">Add to Cart</a>
+                                            <a href="#add-to-cart" class="btn btn-red btn-effect" ng-click="addCart(coffeedata.item_id)">Add to Cart</a>
                                         </div>
 
                                     </div>
