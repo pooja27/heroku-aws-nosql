@@ -11,10 +11,19 @@
 /* =================================== */
 /*	Basic Style 
 /* =================================== */
-#step-count,#step-count-tea{
+
+#filter-tea,#filter-coffee,#filter-drinks{
+    border-radius: 7px;
+    background-color:#ffffff;
+    font-family: 'Open Sans', sans-serif;
+    width:295px;height:175px;
+    border:1px solid #ffffff;
+
+}
+#step-count,#step-count-tea,#step-count-drink{
     border-radius:5px;
 }
-#fig-caption,#price-lb,#fig-caption-tea,#price-lb-tea{
+#fig-caption,#price-lb,#fig-caption-tea,#fig-caption-drink,#price-lb-tea,#price-lb-drink{
     color: #000;
 }
 #individual-product {
@@ -22,6 +31,9 @@
 }
 
 #individual-products-teas{
+    background-color: #ffffff
+}
+#individual-products-drinks{
     background-color: #ffffff
 }
 
@@ -1635,5 +1647,88 @@ textarea.form-control {
 
 #tea-list .owl-prev:hover,
 #tea-list .owl-next:hover {
+    color: #fff;
+}
+
+
+/*=================================================================
+	Drinks-list
+==================================================================*/
+
+
+#drinks-list {
+    background-image: url(../img/parallax/testimonial.jpg);
+    padding: 0;
+    color: #fff;
+}
+
+#drinks-list .sec-title h2:after {
+    border-bottom: 1px solid #fff;
+}
+
+#drinks-list .overlay {
+    background-color: rgba(15,155,224, 0.78);
+    padding: 70px 0 40px;
+}
+
+.testimonial-item {
+    margin: 0 auto;
+    padding-bottom: 50px;
+    width: 64%;
+}
+
+.testimonial-item img {
+    border: 3px solid #fff;
+    border-radius: 50%;
+    display: inline-block;
+    height: 185px;
+    max-width: 300px;
+}
+
+.testimonial-item > div {
+    line-height: 30px;
+    position: relative;
+}
+
+.testimonial-item > div:before {
+    background-image: url("../img/icons/quotes.png");
+    background-repeat: no-repeat;
+    bottom: 127px;
+    height: 33px;
+    left: -35px;
+    position: absolute;
+    width: 45px;
+}
+
+.testimonial-item > div:after {
+    background-image: url("../img/icons/quotes.png");
+    background-position: -58px 0;
+    background-repeat: no-repeat;
+    bottom: -50px;
+    height: 33px;
+    position: absolute;
+    right: 0;
+    width: 45px;
+}
+
+.testimonial-item > div > span {
+    display: inline-block;
+    font-weight: 700;
+    margin: 40px 0 30px;
+    text-transform: uppercase;
+}
+
+#drinks-list .owl-controls.clickable {
+    margin-top: 20px;
+    text-align: center;
+}
+
+#drinks-list .owl-buttons {
+    border: 2px solid #fff;
+    float: inherit;
+}
+
+#drinks-list .owl-prev:hover,
+#drinks-list .owl-next:hover {
     color: #fff;
 }

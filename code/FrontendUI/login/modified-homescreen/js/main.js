@@ -1318,7 +1318,7 @@ app.controller("Controller", ['$scope', function($scope) {
             "price":50,
             "count":12,
             "item_id":"tea_9",
-            "name":"Tazo Zen Iced Green Filterbag Tea, 24 count",
+            "name":"teavana Zen Iced Green Filterbag Tea, 24 count",
             "brand":"teavana",
             "type":"green tea",
             "tea_form":"K-Cup Pods"
@@ -1353,6 +1353,81 @@ app.controller("Controller", ['$scope', function($scope) {
             "type":"black tea",
             "tea_form":"tea bags"
         }];
+
+    $scope.drinkcataloge = [
+        {
+            "category":"drinkware",
+            "price":15.95,
+            "item_id":"drinkware_1",
+            "name":"Spring Garden Traveler, 12 fl oz"
+        },
+        {
+            "category":"drinkware",
+            "price":18.55,
+            "item_id":"drinkware_2",
+            "name":"Stainless Steel Bouquet Tumbler, 16 fl oz"
+        },
+        {
+            "category":"drinkware",
+            "price":15.95,
+            "item_id":"drinkware_3",
+            "name":"Cold Cup Tumbler - Aqua, 24 fl oz"
+        },
+        {
+            "category":"drinkware",
+            "price":18.55,
+            "item_id":"drinkware_4",
+            "name":"Pink Floral Cold Cup, 16 fl oz"
+        },
+        {
+            "category":"drinkware",
+            "price":15.95,
+            "item_id":"drinkware_5",
+            "name":"Ceramic Garden Party Traveler, 8 fl oz"
+        },
+        {
+            "category":"drinkware",
+            "price":18.55,
+            "item_id":"drinkware_6",
+            "name":"Floral Mug - Blue, 16 fl oz"
+        },
+        {
+            "category":"drinkware",
+            "price":15.95,
+            "item_id":"drinkware_7",
+            "name":"Floral Mug - Mint, 16 fl oz"
+        },
+        {
+            "category":"drinkware",
+            "price":18.55,
+            "item_id":"drinkware_8",
+            "name":"Double Wall Ceramic Globe Traveler - 12 fl oz"
+        },
+        {
+            "category":"drinkware",
+            "price":15.95,
+            "item_id":"drinkware_9",
+            "name":"S'well Water Bottle - Sweet Mint Glitter, 17 fl oz"
+        },
+        {
+            "category":"drinkware",
+            "price":18.55,
+            "item_id":"drinkware_10",
+            "name":"S'well Water Bottle - Pink Sands Satin, 17 fl oz"
+        },
+        {
+            "category":"drinkware",
+            "price":15.95,
+            "item_id":"drinkware_11",
+            "name":"Pink Bouquet Ceramic Traveler adorned with Swarovski crystals , 12 fl oz"
+        },
+        {
+            "category":"drinkware",
+            "price":18.55,
+            "item_id":"drinkware_12",
+            "name":"Spring Showers Mug, 12 fl oz"
+        }
+    ]
 }]);
 /*	Preloader
 /* ========================================================================= */
