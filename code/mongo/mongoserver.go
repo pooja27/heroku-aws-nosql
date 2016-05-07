@@ -24,31 +24,23 @@ var debugModeActivated bool
 
 /* ------- Structs ------- */
 
-//struct to store in products collection
-// type Product struct {
-// 	ProductID		string	`json:"productid" bson:"productid"`
-// 	Name				string 	`json:"name" bson:"name"`
-// 	Type				string 	`json:"type" bson:"type"`
-// 	Description string 	`json:"description" bson:"description"`
-// 	Price 			float64	`json:"price" bson:"price"`
-// }
-
 //struct to store in Inventory collection
 type Inventory struct {
 	Item_ID string	`json:"item_id"	bson:"item_id"`
 	Stock		int64		`json:"stock"		bson:"stock"`
 }
 
-//struct to store in Inventory collection
+//struct to store in Cart collection
 type Cart struct {
 	Userid		string 		`json:"userid" 	bson:"userid"`
-	Item_IDs 	[]string	`json:"item_ids"	bson:"item_ids"`
+	Items 		[]Item	`json:"items"	bson:"items"`
 }
 
-//struct to receive Inventory update request
-// type Stock struct {
-// 	Stock		int64		`json:"stock"		bson:"stock"`
-// }
+type Item struct {
+	Item_ID		string 		`json:"item_id" 	bson:"item_id"`
+	Price 		float64		`json:"price"			bson:"price"`
+	Name 			string		`json:"name" 			bson:"name"`
+}
 
 //struct to store in coffee collection
 type ProductCoffee struct {
@@ -104,44 +96,63 @@ type ResponseController struct {
 
 /* ------- REST Functions ------- */
 
+// DeleteUserCart deletes the user cart
+func (rc ResponseController) DeleteUserCart(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+	userid := p.ByName("userid")
+	fmt.Println("DELETE Request Delete user Cart: userid:", userid)
+
+	if err := rc.session.DB(Database).C("cart").Remove(bson.M{"userid" : userid}); err != nil {
+		sendErrorResponse(w,err,500)
+		return
+	}
+
+	sendSuccessResponseCartDeleted(w, userid)
+
+}
+
 // RemoveFromUserCart serves the user cart remove item PUT request
 func (rc ResponseController) RemoveFromUserCart(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
  userid := p.ByName("userid")
  itemid := p.ByName("itemid")
  fmt.Println("PUT Request Remove From Cart: userid:", userid, " item_id:", itemid)
 
- var newList []string
+ var newList []Item
  currCart, err := getUserCartDB(userid, rc)
  if err == nil {
-	 size := len(currCart.Item_IDs)
+	 size := len(currCart.Items)
 	 if size < 2 {
-		 if err := rc.session.DB(Database).C("cart").Remove(bson.M{"userid" : userid}); err != nil {
-			 sendErrorResponse(w,err,500)
+		 if currCart.Items[0].Item_ID == itemid {
+			 if err := rc.session.DB(Database).C("cart").Remove(bson.M{"userid" : userid}); err != nil {
+				 sendErrorResponse(w,err,500)
+			 } else {
+				 sendSuccessResponseCartDeleted(w, userid)
+			 }
+			 return
 		 } else {
-			 sendSuccessResponseCartDeleted(w, userid)
+			 sendErrorResponse(w,errors.New("item_id invalid"),404)
+			 return
 		 }
-		 return
 	 }
-	 newList = make([]string, size-1)
+	 newList = make([]Item, size-1)
 	 i := 0
 	 j := 0
 	 found := false
-	 for i := 0; i<size && j<size-1; i++ { //keep adding items until not found, if found add all remaining items
-		 if found || currCart.Item_IDs[i] != itemid {
-			 newList[j] = currCart.Item_IDs[i]
+	 for ; i<size && j<size-1; i++ { //keep adding items until not found, if found add all remaining items
+		 if found || currCart.Items[i].Item_ID != itemid {
+			 newList[j] = currCart.Items[i]
 			 j++
 		 } else {
 			 found = true
 		 }
 	}
 
-	if found == false && currCart.Item_IDs [i] != itemid { //if item is not found and last item is also not equal to given item
+	if found == false && currCart.Items[i].Item_ID != itemid { //if item is not found and last item is also not equal to given item
 		sendErrorResponse(w,errors.New("item_id invalid"),404)
 		return
 	}
 
-	currCart.Item_IDs = newList
-	change := bson.M{"$set": bson.M{"item_ids" : currCart.Item_IDs}}
+	currCart.Items = newList
+	change := bson.M{"$set": bson.M{"items" : currCart.Items}}
 
   if err := rc.session.DB(Database).C("cart").Update(bson.M{"userid": userid}, change); err != nil {
  	 sendErrorResponse(w,err,500)
@@ -157,47 +168,71 @@ func (rc ResponseController) RemoveFromUserCart(w http.ResponseWriter, r *http.R
 
 }
 
-// // GetUserCart serves the user cart GET request
-// func (rc ResponseController) GetUserCart(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
-//  userid := p.ByName("userid")
-//  fmt.Println("GET Request Cart: userid:", userid)
-//
-//  resp, err := getUserCartDB(userid, rc)
-//  if err != nil {
-// 	 sendErrorResponse(w,err,404)
-// 	 return
-//  }
-//
-//  jsonOut, _ := json.Marshal(resp)
-//  httpResponse(w, jsonOut, 200)
-//  fmt.Println("Response:", string(jsonOut), " 200 OK")
-// }
-
 // AddToUserCart serves the user cart add item PUT request
 func (rc ResponseController) AddToUserCart(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
  userid := p.ByName("userid")
  itemid := p.ByName("itemid")
- fmt.Println("PUT Request Add To Cart: userid:", userid, " item_id:", itemid)
+ typee := p.ByName("type")
+ fmt.Println("PUT Request Add To Cart: userid:", userid, " item_id:", itemid, " type:", typee)
 
- var newList []string
+ var price float64
+ var name string
+ errMsg := "item id not found for type " + typee
+
+ if typee == "tea" {
+	 product, err := getProductTeaDB(itemid, rc)
+	 if err != nil {
+		 sendErrorResponse(w,errors.New(errMsg),404)
+		 return
+	 } else {
+		 price = product.Price
+		 name = product.Name
+	 }
+ } else if typee == "coffee" {
+	 product, err := getProductCoffeeDB(itemid, rc)
+	 if err != nil {
+		 sendErrorResponse(w,errors.New(errMsg),404)
+		 return
+	 } else {
+		 price = product.Price
+		 name = product.Name
+	 }
+ } else if typee == "drinkware" {
+	 product, err := getProductDrinkwareDB(itemid, rc)
+	 if err != nil {
+		 sendErrorResponse(w,errors.New(errMsg),404)
+		 return
+	 } else {
+		 price = product.Price
+		 name = product.Name
+	 }
+ } else {
+	 sendErrorResponse(w,errors.New("item type is invalid"),404)
+	 return
+ }
+
+ var newList []Item
  currCart, err := getUserCartDB(userid, rc)
  size := 1
  if err == nil {
-	 size = len(currCart.Item_IDs) + 1
-	 newList = make([]string, size)
-	 for i, x := range currCart.Item_IDs {
+	 size = len(currCart.Items) + 1
+	 newList = make([]Item, size)
+	 for i, x := range currCart.Items {
 		newList[i] = x
 	}
  } else {
 	 currCart.Userid = userid
-	 newList = make([]string, 1)
+	 newList = make([]Item, 1)
  }
- newList[size-1] = itemid
- currCart.Item_IDs = newList
+ newList[size-1].Item_ID = itemid
+ newList[size-1].Price = price
+ newList[size-1].Name = name
 
- change := bson.M{"$set": bson.M{"item_ids" : currCart.Item_IDs}}
+ currCart.Items = newList
 
- if _,err := rc.session.DB(Database).C("cart").Upsert(bson.M{"userid": userid}, change); err != nil {
+ change := bson.M{"$set": bson.M{"items" : currCart.Items}}
+
+if _,err := rc.session.DB(Database).C("cart").Upsert(bson.M{"userid": userid}, change); err != nil {
 	 sendErrorResponse(w,err,500)
 	 return
  }
@@ -343,19 +378,6 @@ func (rc ResponseController) GetAllDrinkware(w http.ResponseWriter, r *http.Requ
 	fmt.Println("Response:", string(jsonOut), " 200 OK")
 }
 
-// // Login serves the Login GET request
-// func (rc ResponseController) GetAllProducts(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
-// 	fmt.Println("GET Request product: allProducts")
-
- //	resp, err := getAllProductsDB(rc)
- //	if err != nil { 		sendErrorResponse(w,err,404)
- //		return
- //	}
- //	jsonOut, _ := json.Marshal(resp)
- //	httpResponse(w, jsonOut, 200)
- //	fmt.Println("Response:", string(jsonOut), " 200 OK")
- //}
-
  // GetDrinkware serves the drinkware GET request
  func (rc ResponseController) GetDrinkware(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
  	productid := p.ByName("itemid")
@@ -404,28 +426,6 @@ func (rc ResponseController) GetTea(w http.ResponseWriter, r *http.Request, p ht
 	fmt.Println("Response:", string(jsonOut), " 200 OK")
 }
 
-// // SaveProduct serves the products POST request
-// func (rc ResponseController) SaveProduct(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
-// 	var req Product
-//
-// 	defer r.Body.Close()
-//
-// 	jsonIn, err := ioutil.ReadAll(r.Body)
-// 	if err != nil {
-// 		sendErrorResponse(w,err,400)
-// 		return
-// 	}
-//
-// 	json.Unmarshal([]byte(jsonIn), &req)
-// 	fmt.Println("POST Request product:", req)
-//
-// 	if err := rc.session.DB("db_test").C("products").Insert(req); err != nil {
-// 		sendErrorResponse(w,err,500)
-// 		return
-// 	}
-// 	sendSuccessResponse(w,201)
-// }
-
 // Signup serves the signup POST request
 func (rc ResponseController) Signup(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	var req UserDetails
@@ -463,114 +463,6 @@ func (rc ResponseController) Login(w http.ResponseWriter, r *http.Request, p htt
 	httpResponse(w, jsonOut, 200)
 	fmt.Println("Response:", string(jsonOut), " 200 OK")
 }
-
-// CreateDocument serves the POST request
-// func (rc ResponseController) CreateDocument(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
-// 	var resp Response
-// 	// var req PostRequest
-// 	// var i interface{}
-//
-// 	defer r.Body.Close()
-// 	jsonIn, err := ioutil.ReadAll(r.Body)
-// 	if err != nil {
-// 		fmt.Println("Panic@CreateLocation.ioutil.ReadAll")
-// 		panic(err)
-// 	}
-//
-// 	// json.Unmarshal([]byte(jsonIn), &req)
-// 	fmt.Println("POST Request:", string(jsonIn))
-// 	// fmt.Println("POST Request:", string(jsonIn))
-//
-// 	resp.ID = bson.NewObjectId()
-// 	//
-// 	resp.Document = string(jsonIn)
-// 	if err := rc.session.DB("db_test").C("col_test").Insert(resp); err != nil {
-// 	    httpResponse(w, nil, 500)
-// 		fmt.Println("Panic@CreateLocation.session.DB.C.Insert")
-// 		panic(err)
-// 	}
-// 	jsonOut, _ := json.Marshal(resp)
-// 	httpResponse(w, jsonOut, 201)
-// 	fmt.Println("Response:", string(jsonOut), " 201 OK")
-// }
-
-// // GetLocation serves the GET request
-// func (rc ResponseController) GetDocument(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
-// 	id := p.ByName("id")
-// 	fmt.Println("GET Request: ID:", id)
-//
-// 	resp, err := getDBData(id, rc)
-// 	if err != nil {
-// 	    w.WriteHeader(404)
-// 		fmt.Println("Response: 404 Not Found")
-// 		return
-// 	}
-//
-// 	jsonOut, _ := json.Marshal(resp)
-// 	httpResponse(w, jsonOut, 200)
-// 	fmt.Println("Response:", string(jsonOut), " 200 OK")
-// }
-
-// UpdateLocation serves the PUT request
-// func (rc ResponseController) UpdateDocument(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
-// 	id := p.ByName("id")
-// 	fmt.Println("PUT Request: ID:", id)
-//
-// 	var req PostRequest
-// 	var resp Response
-//
-// 	if !bson.IsObjectIdHex(id) {
-// 		w.WriteHeader(404)
-// 		fmt.Println("Response: 404 Not Found")
-// 		return
-// 	}
-//
-// 	defer r.Body.Close()
-// 	jsonIn, err := ioutil.ReadAll(r.Body)
-// 	if err != nil {
-// 		fmt.Println("Panic@UpdateLocation.ioutil.ReadAll")
-// 		panic(err)
-// 	}
-//
-// 	json.Unmarshal([]byte(jsonIn), &req)
-// 	fmt.Println("PUT Request:", req)
-//
-// 	//resp.Coordinate = req.Coordinate
-// 	oid := bson.ObjectIdHex(id)
-// 	resp.ID = oid;
-//
-// 	if err := rc.session.DB("db_test").C("col_test").UpdateId(oid, resp); err != nil {
-// 		w.WriteHeader(404)
-// 		fmt.Println("Response: 404 Not Found")
-// 		return
-// 	}
-//
-// 	jsonOut, _ := json.Marshal(resp)
-// 	httpResponse(w, jsonOut, 201)
-// 	fmt.Println("Response:", string(jsonOut), " 201 OK")
-// }
-
-// // DeleteLocation deletes existing user
-// func (rc ResponseController) DeleteDocument(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
-// 	id := p.ByName("id")
-// 	fmt.Println("DELETE Request: ID:", id)
-//
-// 	if !bson.IsObjectIdHex(id) {
-// 		w.WriteHeader(404)
-// 		fmt.Println("Response: 404 Not Found")
-// 		return
-// 	}
-//
-// 	oid := bson.ObjectIdHex(id)
-//
-// 	if err := rc.session.DB("db_test").C("col_test").RemoveId(oid); err != nil {
-// 		fmt.Println("Response: 404 Not Found")
-// 		return
-// 	}
-//
-// 	fmt.Println("Response: 200 OK")
-// 	w.WriteHeader(200)
-// }
 
 /* ------- Helper Functions ------- */
 
@@ -623,17 +515,6 @@ func getAllCoffeeDB(rc ResponseController) ([]ProductCoffee, error) {
 	}
 	return resp, nil
 }
-
-// //Get data corresponding to the user id
-// func getAllProductsDB(rc ResponseController) ([]Product, error) {
-// 	var resp []Product
-//
-// 	if err := rc.session.DB("db_test").C("products").Find(nil).All(&resp); err != nil {
-// 		return resp, err
-// 	}
-// 	return resp, nil
-// }
-//
 
 //Get Drinkware data corresponding to the productid
 func getProductDrinkwareDB(itemid string, rc ResponseController) (ProductDrinkware, error) {
@@ -735,19 +616,6 @@ func getSession() *mgo.Session {
 	return s
 }
 
-//Get data corresponding to the object id
-// func getDBData(id string, rc ResponseController) (Response, error) {
-// 	var resp Response
-// 	if !bson.IsObjectIdHex(id) {
-// 		return resp, errors.New("404")
-// 	}
-// 	oid := bson.ObjectIdHex(id)
-// 	if err := rc.session.DB("db_test").C("col_test").FindId(oid).One(&resp); err != nil {
-// 		return resp, errors.New("404")
-// 	}
-// 	return resp, nil
-// }
-
 /* ------- Main Function ------- */
 
 func main() {
@@ -762,7 +630,7 @@ func main() {
   fmt.Println("Starting server...")
 	r := httprouter.New()
 	rc := NewResponseController(getSession())
-	//r.GET("/mongoserver/:id", rc.GetDocument)
+
 	r.GET("/mongoserver/login/:userid", rc.Login)
 
 	r.GET("/mongoserver/teas", rc.GetAllTea)
@@ -777,18 +645,14 @@ func main() {
 	r.PUT("/mongoserver/inventory/addOne/:itemid", rc.UpdateInventoryAddOne)
 	r.PUT("/mongoserver/inventory/removeOne/:itemid", rc.UpdateInventoryRemoveOne)
 
-	r.PUT("/mongoserver/cart/addItem/:userid/:itemid", rc.AddToUserCart)
+	r.PUT("/mongoserver/cart/addItem/:userid/:type/:itemid", rc.AddToUserCart)
 	r.PUT("/mongoserver/cart/removeItem/:userid/:itemid", rc.RemoveFromUserCart)
 	r.GET("/mongoserver/cart/:userid", rc.GetUserCart)
-	// r.GET("/mongoserver/product/:productid", rc.GetProduct)
-	// r.GET("/mongoserver/allProducts", rc.GetAllProducts)
-	// r.POST("/mongoserver", rc.CreateDocument)
-	// r.POST("/mongoserver/product", rc.SaveProduct)
+	r.DELETE("/mongoserver/cart/:userid", rc.DeleteUserCart)
+
 	r.POST("/mongoserver/signup", rc.Signup)
 
-	//r.POST("/mongoserver/cart", rc.Signup)
-	// r.DELETE("/mongoserver/:id", rc.DeleteDocument)
-	// r.PUT("/mongoserver/:id", rc.UpdateDocument)
 	fmt.Println("Server is Ready !")
 	fmt.Println(http.ListenAndServe(":7777",r))
+
 }

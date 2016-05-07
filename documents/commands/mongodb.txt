@@ -2,6 +2,8 @@ ps -eaf|grep mongod
 sudo service mongod status
 sudo service mongod start
 
+sudo netstat -nalp | grep 27017
+
 mongod --port 27017 --dbpath /data/db/ --replSet rs0
 
 Queries:
@@ -12,4 +14,4 @@ db.users.find().pretty()
 
 db.createCollection("inventory")
 
-db.cart.insert( { userid: "tuser@gmail.com", item_ids: ["tea_9", "coffee_9"] } )
+db.cart.insert( { userid: "tuser@gmail.com", items: [{item_id: "tea_9", price: 56}, {item_id: "coffee_9", price: 46}] } )
