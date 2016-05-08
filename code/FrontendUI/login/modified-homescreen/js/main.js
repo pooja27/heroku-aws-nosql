@@ -1428,6 +1428,12 @@ app.controller("Controller", ['$scope', function($scope) {
             "name":"Spring Showers Mug, 12 fl oz"
         }
     ]
+
+
+
+    $scope.analyticscatalogue = [
+        
+    ]
 }]);
 /*	Preloader
 /* ========================================================================= */
