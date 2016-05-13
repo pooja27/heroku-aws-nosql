@@ -8,6 +8,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"os"
+	"time"
 
 	"github.com/julienschmidt/httprouter"
 	"gopkg.in/mgo.v2"
@@ -21,6 +22,10 @@ const (
 /* ------- Debugging variables ------- */
 var out io.Writer
 var debugModeActivated bool
+
+/* ------- Global Variables ------- */
+var rc *ResponseController
+var mongoTimeout time.Duration
 
 /* ------- Structs ------- */
 
@@ -97,9 +102,13 @@ type ResponseController struct {
 /* ------- REST Functions ------- */
 
 // DeleteUserCart deletes the user cart
-func (rc ResponseController) DeleteUserCart(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+func DeleteUserCart(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	userid := p.ByName("userid")
 	fmt.Println("DELETE Request Delete user Cart: userid:", userid)
+
+	if err := checkMongoSession(w); err !=nil {
+		return
+	}
 
 	if err := rc.session.DB(Database).C("cart").Remove(bson.M{"userid" : userid}); err != nil {
 		sendErrorResponse(w,err,500)
@@ -111,13 +120,17 @@ func (rc ResponseController) DeleteUserCart(w http.ResponseWriter, r *http.Reque
 }
 
 // RemoveFromUserCart serves the user cart remove item PUT request
-func (rc ResponseController) RemoveFromUserCart(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+func RemoveFromUserCart(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
  userid := p.ByName("userid")
  itemid := p.ByName("itemid")
  fmt.Println("PUT Request Remove From Cart: userid:", userid, " item_id:", itemid)
 
+ if err := checkMongoSession(w); err !=nil {
+	 return
+ }
+
  var newList []Item
- currCart, err := getUserCartDB(userid, rc)
+ currCart, err := getUserCartDB(userid)
  if err == nil {
 	 size := len(currCart.Items)
 	 if size < 2 {
@@ -169,18 +182,22 @@ func (rc ResponseController) RemoveFromUserCart(w http.ResponseWriter, r *http.R
 }
 
 // AddToUserCart serves the user cart add item PUT request
-func (rc ResponseController) AddToUserCart(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+func AddToUserCart(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
  userid := p.ByName("userid")
  itemid := p.ByName("itemid")
  typee := p.ByName("type")
  fmt.Println("PUT Request Add To Cart: userid:", userid, " item_id:", itemid, " type:", typee)
+
+ if err := checkMongoSession(w); err !=nil {
+	 return
+ }
 
  var price float64
  var name string
  errMsg := "item id not found for type " + typee
 
  if typee == "tea" {
-	 product, err := getProductTeaDB(itemid, rc)
+	 product, err := getProductTeaDB(itemid)
 	 if err != nil {
 		 sendErrorResponse(w,errors.New(errMsg),404)
 		 return
@@ -189,7 +206,7 @@ func (rc ResponseController) AddToUserCart(w http.ResponseWriter, r *http.Reques
 		 name = product.Name
 	 }
  } else if typee == "coffee" {
-	 product, err := getProductCoffeeDB(itemid, rc)
+	 product, err := getProductCoffeeDB(itemid)
 	 if err != nil {
 		 sendErrorResponse(w,errors.New(errMsg),404)
 		 return
@@ -198,7 +215,7 @@ func (rc ResponseController) AddToUserCart(w http.ResponseWriter, r *http.Reques
 		 name = product.Name
 	 }
  } else if typee == "drinkware" {
-	 product, err := getProductDrinkwareDB(itemid, rc)
+	 product, err := getProductDrinkwareDB(itemid)
 	 if err != nil {
 		 sendErrorResponse(w,errors.New(errMsg),404)
 		 return
@@ -212,7 +229,7 @@ func (rc ResponseController) AddToUserCart(w http.ResponseWriter, r *http.Reques
  }
 
  var newList []Item
- currCart, err := getUserCartDB(userid, rc)
+ currCart, err := getUserCartDB(userid)
  size := 1
  if err == nil {
 	 size = len(currCart.Items) + 1
@@ -243,11 +260,15 @@ if _,err := rc.session.DB(Database).C("cart").Upsert(bson.M{"userid": userid}, c
 }
 
 // GetUserCart serves the user cart GET request
-func (rc ResponseController) GetUserCart(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+func GetUserCart(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
  userid := p.ByName("userid")
  fmt.Println("GET Request Cart: userid:", userid)
 
- resp, err := getUserCartDB(userid, rc)
+ if err := checkMongoSession(w); err !=nil {
+	 return
+ }
+
+ resp, err := getUserCartDB(userid)
  if err != nil {
 	 sendErrorResponse(w,err,404)
 	 return
@@ -259,13 +280,17 @@ func (rc ResponseController) GetUserCart(w http.ResponseWriter, r *http.Request,
 }
 
 // UpdateInventoryRemoveOne serves the Inventory PUT request to decrement by one
-func (rc ResponseController) UpdateInventoryRemoveOne(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+func UpdateInventoryRemoveOne(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	itemid := p.ByName("itemid")
 	fmt.Println("PUT Request: inventoryRemoveOne : itemid:", itemid)
 
+	if err := checkMongoSession(w); err !=nil {
+		return
+	}
+
 	var resp Inventory
 
-	resp, err := getInventoryDB(itemid, rc)
+	resp, err := getInventoryDB(itemid)
 	if err != nil {
 		sendErrorResponse(w,err,404)
 		return
@@ -291,13 +316,17 @@ func (rc ResponseController) UpdateInventoryRemoveOne(w http.ResponseWriter, r *
 }
 
 // UpdateInventoryAddOne serves the Inventory PUT request to increment by one
-func (rc ResponseController) UpdateInventoryAddOne(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+func UpdateInventoryAddOne(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	itemid := p.ByName("itemid")
 	fmt.Println("PUT Request: inventoryAddOne : itemid:", itemid)
 
+	if err := checkMongoSession(w); err !=nil {
+		return
+	}
+
 	var resp Inventory
 
-	resp, err := getInventoryDB(itemid, rc)
+	resp, err := getInventoryDB(itemid)
 	if err != nil {
 		sendErrorResponse(w,err,404)
 		return
@@ -318,11 +347,15 @@ func (rc ResponseController) UpdateInventoryAddOne(w http.ResponseWriter, r *htt
 }
 
 // GetInventory serves the Inventory GET request
-func (rc ResponseController) GetInventory(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+func GetInventory(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	itemid := p.ByName("itemid")
 	fmt.Println("GET Request inventory: itemid:", itemid)
 
-	resp, err := getInventoryDB(itemid, rc)
+	if err := checkMongoSession(w); err !=nil {
+		return
+	}
+
+	resp, err := getInventoryDB(itemid)
 	if err != nil {
 		sendErrorResponse(w,err,404)
 		return
@@ -334,10 +367,14 @@ func (rc ResponseController) GetInventory(w http.ResponseWriter, r *http.Request
 }
 
 // GetAllCoffee serves the coffee GET request
-func (rc ResponseController) GetAllCoffee(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+func GetAllCoffee(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	fmt.Println("GET Request all coffee")
 
-	resp, err := getAllCoffeeDB(rc)
+	if err := checkMongoSession(w); err !=nil {
+		return
+	}
+
+	resp, err := getAllCoffeeDB()
 	if err != nil {
 		sendErrorResponse(w,err,404)
 		return
@@ -349,10 +386,14 @@ func (rc ResponseController) GetAllCoffee(w http.ResponseWriter, r *http.Request
 }
 
 // GetAllTea serves the tea GET request
-func (rc ResponseController) GetAllTea(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+func GetAllTea(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	fmt.Println("GET Request all tea")
 
-	resp, err := getAllTeaDB(rc)
+	if err := checkMongoSession(w); err !=nil {
+		return
+	}
+
+	resp, err := getAllTeaDB()
 	if err != nil {
 		sendErrorResponse(w,err,404)
 		return
@@ -364,10 +405,14 @@ func (rc ResponseController) GetAllTea(w http.ResponseWriter, r *http.Request, p
 }
 
 // GetAllTea serves the tea GET request
-func (rc ResponseController) GetAllDrinkware(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+func GetAllDrinkware(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	fmt.Println("GET Request all drinkware")
 
-	resp, err := getAllDrinkwareDB(rc)
+	if err := checkMongoSession(w); err !=nil {
+		return
+	}
+
+	resp, err := getAllDrinkwareDB()
 	if err != nil {
 		sendErrorResponse(w,err,404)
 		return
@@ -379,11 +424,15 @@ func (rc ResponseController) GetAllDrinkware(w http.ResponseWriter, r *http.Requ
 }
 
  // GetDrinkware serves the drinkware GET request
- func (rc ResponseController) GetDrinkware(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+ func GetDrinkware(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
  	productid := p.ByName("itemid")
  	fmt.Println("GET Request Drinkware: itemid:", productid)
 
- 	resp, err := getProductDrinkwareDB(productid, rc)
+	if err := checkMongoSession(w); err !=nil {
+		return
+	}
+
+ 	resp, err := getProductDrinkwareDB(productid)
  	if err != nil {
  		sendErrorResponse(w,err,404)
  		return
@@ -395,11 +444,15 @@ func (rc ResponseController) GetAllDrinkware(w http.ResponseWriter, r *http.Requ
  }
 
  // GetCoffee serves the coffee GET request
- func (rc ResponseController) GetCoffee(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+ func GetCoffee(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
  	productid := p.ByName("itemid")
  	fmt.Println("GET Request Coffee: itemid:", productid)
 
- 	resp, err := getProductCoffeeDB(productid, rc)
+	if err := checkMongoSession(w); err !=nil {
+		return
+	}
+
+ 	resp, err := getProductCoffeeDB(productid)
  	if err != nil {
  		sendErrorResponse(w,err,404)
  		return
@@ -411,11 +464,15 @@ func (rc ResponseController) GetAllDrinkware(w http.ResponseWriter, r *http.Requ
  }
 
 // GetTea serves the tea GET request
-func (rc ResponseController) GetTea(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+func GetTea(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	productid := p.ByName("itemid")
 	fmt.Println("GET Request Tea: itemid:", productid)
 
-	resp, err := getProductTeaDB(productid, rc)
+	if err := checkMongoSession(w); err !=nil {
+		return
+	}
+
+	resp, err := getProductTeaDB(productid)
 	if err != nil {
 		sendErrorResponse(w,err,404)
 		return
@@ -427,7 +484,8 @@ func (rc ResponseController) GetTea(w http.ResponseWriter, r *http.Request, p ht
 }
 
 // Signup serves the signup POST request
-func (rc ResponseController) Signup(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+func Signup(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+
 	var req UserDetails
 
 	defer r.Body.Close()
@@ -441,6 +499,10 @@ func (rc ResponseController) Signup(w http.ResponseWriter, r *http.Request, p ht
 	json.Unmarshal([]byte(jsonIn), &req)
 	fmt.Println("POST Request signup:", req)
 
+	if err := checkMongoSession(w); err !=nil {
+		return
+	}
+
 	if err := rc.session.DB("db_test").C("users").Insert(req); err != nil {
 		sendErrorResponse(w,err,500)
 		return
@@ -449,11 +511,15 @@ func (rc ResponseController) Signup(w http.ResponseWriter, r *http.Request, p ht
 }
 
 // Login serves the Login GET request
-func (rc ResponseController) Login(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+func Login(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	userid := p.ByName("userid")
 	fmt.Println("GET Request login: userid:", userid)
 
-	resp, err := getUserDetailsDB(userid, rc)
+	if err := checkMongoSession(w); err !=nil {
+		return
+	}
+
+	resp, err := getUserDetailsDB(userid)
 	if err != nil {
 		sendErrorResponse(w,err,404)
 		return
@@ -467,7 +533,7 @@ func (rc ResponseController) Login(w http.ResponseWriter, r *http.Request, p htt
 /* ------- Helper Functions ------- */
 
 //Get cart corresponding to the userid
-func getUserCartDB(userid string, rc ResponseController) (Cart, error) {
+func getUserCartDB(userid string) (Cart, error) {
 	var resp Cart
 
 	if err := rc.session.DB(Database).C("cart").Find(bson.M{"userid" : userid}).One(&resp); err != nil {
@@ -477,7 +543,7 @@ func getUserCartDB(userid string, rc ResponseController) (Cart, error) {
 }
 
 //Get inventory corresponding to the item id
-func getInventoryDB(itemid string, rc ResponseController) (Inventory, error) {
+func getInventoryDB(itemid string) (Inventory, error) {
 	var resp Inventory
 
 	if err := rc.session.DB(Database).C("inventory").Find(bson.M{"item_id" : itemid}).One(&resp); err != nil {
@@ -487,7 +553,7 @@ func getInventoryDB(itemid string, rc ResponseController) (Inventory, error) {
 }
 
 //Get all tea products from DB
-func getAllDrinkwareDB(rc ResponseController) ([]ProductDrinkware, error) {
+func getAllDrinkwareDB() ([]ProductDrinkware, error) {
 	var resp []ProductDrinkware
 
 	if err := rc.session.DB(Database).C("drinkware").Find(nil).All(&resp); err != nil {
@@ -497,7 +563,7 @@ func getAllDrinkwareDB(rc ResponseController) ([]ProductDrinkware, error) {
 }
 
 //Get all tea products from DB
-func getAllTeaDB(rc ResponseController) ([]ProductTea, error) {
+func getAllTeaDB() ([]ProductTea, error) {
 	var resp []ProductTea
 
 	if err := rc.session.DB(Database).C("tea").Find(nil).All(&resp); err != nil {
@@ -507,7 +573,7 @@ func getAllTeaDB(rc ResponseController) ([]ProductTea, error) {
 }
 
 //Get all coffee products from DB
-func getAllCoffeeDB(rc ResponseController) ([]ProductCoffee, error) {
+func getAllCoffeeDB() ([]ProductCoffee, error) {
 	var resp []ProductCoffee
 
 	if err := rc.session.DB(Database).C("coffee").Find(nil).All(&resp); err != nil {
@@ -517,7 +583,7 @@ func getAllCoffeeDB(rc ResponseController) ([]ProductCoffee, error) {
 }
 
 //Get Drinkware data corresponding to the productid
-func getProductDrinkwareDB(itemid string, rc ResponseController) (ProductDrinkware, error) {
+func getProductDrinkwareDB(itemid string) (ProductDrinkware, error) {
 	var resp ProductDrinkware
 
 	if err := rc.session.DB(Database).C("drinkware").Find(bson.M{"item_id" : itemid}).One(&resp); err != nil {
@@ -527,7 +593,7 @@ func getProductDrinkwareDB(itemid string, rc ResponseController) (ProductDrinkwa
 }
 
 //Get Coffee data corresponding to the productid
-func getProductCoffeeDB(itemid string, rc ResponseController) (ProductCoffee, error) {
+func getProductCoffeeDB(itemid string) (ProductCoffee, error) {
 	var resp ProductCoffee
 
 	if err := rc.session.DB(Database).C("coffee").Find(bson.M{"item_id" : itemid}).One(&resp); err != nil {
@@ -537,7 +603,7 @@ func getProductCoffeeDB(itemid string, rc ResponseController) (ProductCoffee, er
 }
 
 //Get Tea data corresponding to the productid
-func getProductTeaDB(itemid string, rc ResponseController) (ProductTea, error) {
+func getProductTeaDB(itemid string) (ProductTea, error) {
 	var resp ProductTea
 
 	if err := rc.session.DB(Database).C("tea").Find(bson.M{"item_id" : itemid}).One(&resp); err != nil {
@@ -547,7 +613,7 @@ func getProductTeaDB(itemid string, rc ResponseController) (ProductTea, error) {
 }
 
 //Get data corresponding to the user id
-func getUserDetailsDB(userid string, rc ResponseController) (UserDetails, error) {
+func getUserDetailsDB(userid string) (UserDetails, error) {
 	var resp UserDetails
 
 	if err := rc.session.DB("db_test").C("users").Find(bson.M{"userid" : userid}).One(&resp); err != nil {
@@ -600,20 +666,32 @@ func httpResponse(w http.ResponseWriter, jsonOut []byte, code int) {
 	fmt.Fprintf(w, "%s", jsonOut)
 }
 
+//gets a new mongo session, return error if not able to get mongo session
+// this function has been added to handle mongodb sessions stopping in background
+func checkMongoSession(w http.ResponseWriter) error {
+	sess, err := getSession()
+	rc = NewResponseController(sess)
+	if (err != nil) {
+		sendErrorResponse(w,err,500)
+		return err
+	}
+	return nil
+}
+
 //NewResponseController function returns reference to ResponseController and a mongoDB session
 func NewResponseController(s *mgo.Session) *ResponseController {
 	return &ResponseController{s}
 }
 
 //returns a mongoDB session
-func getSession() *mgo.Session {
-    //Enter mongoLab connection string here
-	s, err := mgo.Dial("mongodb://localhost")
+func getSession() (session *mgo.Session, err error) {
+  //Enter mongoLab connection string here
+	s, err := mgo.DialWithTimeout("mongodb://localhost", mongoTimeout)
 	if err != nil {
-		fmt.Println("Panic@getSession.Dial")
-		panic(err)
+		fmt.Println("Unable to get Mongo session")
+		return nil, errors.New("Unable to get Mongo session")
 	}
-	return s
+	return s,nil
 }
 
 /* ------- Main Function ------- */
@@ -627,30 +705,34 @@ func main() {
 	}
 	//---------------------debugging variables
 
+	mongoTimeout = time.Duration(2 * time.Second)
+
   fmt.Println("Starting server...")
 	r := httprouter.New()
-	rc := NewResponseController(getSession())
 
-	r.GET("/mongoserver/login/:userid", rc.Login)
+	sess, _ := getSession()
+	rc = NewResponseController(sess)
 
-	r.GET("/mongoserver/teas", rc.GetAllTea)
-	r.GET("/mongoserver/coffees", rc.GetAllCoffee)
-	r.GET("/mongoserver/drinkwares", rc.GetAllDrinkware)
+	r.GET("/mongoserver/login/:userid", Login)
 
-	r.GET("/mongoserver/tea/:itemid", rc.GetTea)
-	r.GET("/mongoserver/coffee/:itemid", rc.GetCoffee)
-	r.GET("/mongoserver/drinkware/:itemid", rc.GetDrinkware)
+	r.GET("/mongoserver/teas", GetAllTea)
+	r.GET("/mongoserver/coffees", GetAllCoffee)
+	r.GET("/mongoserver/drinkwares", GetAllDrinkware)
 
-	r.GET("/mongoserver/inventory/:itemid", rc.GetInventory)
-	r.PUT("/mongoserver/inventory/addOne/:itemid", rc.UpdateInventoryAddOne)
-	r.PUT("/mongoserver/inventory/removeOne/:itemid", rc.UpdateInventoryRemoveOne)
+	r.GET("/mongoserver/tea/:itemid", GetTea)
+	r.GET("/mongoserver/coffee/:itemid", GetCoffee)
+	r.GET("/mongoserver/drinkware/:itemid", GetDrinkware)
 
-	r.PUT("/mongoserver/cart/addItem/:userid/:type/:itemid", rc.AddToUserCart)
-	r.PUT("/mongoserver/cart/removeItem/:userid/:itemid", rc.RemoveFromUserCart)
-	r.GET("/mongoserver/cart/:userid", rc.GetUserCart)
-	r.DELETE("/mongoserver/cart/:userid", rc.DeleteUserCart)
+	r.GET("/mongoserver/inventory/:itemid", GetInventory)
+	r.PUT("/mongoserver/inventory/addOne/:itemid", UpdateInventoryAddOne)
+	r.PUT("/mongoserver/inventory/removeOne/:itemid", UpdateInventoryRemoveOne)
 
-	r.POST("/mongoserver/signup", rc.Signup)
+	r.PUT("/mongoserver/cart/addItem/:userid/:type/:itemid", AddToUserCart)
+	r.PUT("/mongoserver/cart/removeItem/:userid/:itemid", RemoveFromUserCart)
+	r.GET("/mongoserver/cart/:userid", GetUserCart)
+	r.DELETE("/mongoserver/cart/:userid", DeleteUserCart)
+
+	r.POST("/mongoserver/signup", Signup)
 
 	fmt.Println("Server is Ready !")
 	fmt.Println(http.ListenAndServe(":7777",r))
