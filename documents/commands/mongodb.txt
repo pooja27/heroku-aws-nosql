@@ -3,6 +3,7 @@ sudo service mongod status
 sudo service mongod start
 
 sudo netstat -nalp | grep 27017
+sudo fuser -v -n tcp 27017
 
 mongod --port 27017 --dbpath /data/db/ --replSet rs0
 

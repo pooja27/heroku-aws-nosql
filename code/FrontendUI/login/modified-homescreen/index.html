@@ -280,96 +280,303 @@ End Fixed Navigation
 		</div>
 	</section>
 	<!-- end Service section -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.4.1/jquery.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.4.1/jquery.js"></script>
+	<!---->
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.css">
 
-	<!-- portfolio section -->
+	<!-- Analytics section -->
 	<section id="portfolio">
 		<div class="container">
 			<div class="row">
 
 				<div class="sec-title text-center wow animated fadeInDown">
-					<h2>FEATURED PROJECTS</h2>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+					<h2>Real time analytics</h2>
 				</div>
+				<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+				<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.js"></script>
+				<link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+				<link href="monthpicker.css" rel="stylesheet" type="text/css">
+				<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.min.js"></script>
+				<link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+				<link href="monthpicker.css" rel="stylesheet" type="text/css">
+				<link rel="stylesheet" type="text/css" media="screen" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/base/jquery-ui.css">
+				<p>Choose the month you wish to view the logs for:</p> <input id="demo-1" type="text" />
+				</div>
+				<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+				<script src="monthpicker.js"></script>
+			<div id="chartContainer" style="height: 300px; width: 100%;"></div>
+			<script src="http://canvasjs.com/assets/script/canvasjs.min.js"></script>
+				<script>
+					var monthselected ="";
+					$('#demo-1').Monthpicker({
+						dateFormat: 'yymmdd',
+						onSelect: function (dateText, inst) {
+							var dateStringForApi = $('#demo-1').val();
+							if (dateStringForApi == "02/2016") {
+								 monthselected = "february";
+							}
+							if (dateStringForApi == "03/2016") {
+								monthselected = "march";
+							}
+							if (dateStringForApi == "01/2016") {
+								monthselected = "january";
+							}
+							if (dateStringForApi == "04/2016") {
+								monthselected = "april";
+							}
+
+							fiterdata(monthselected);
+						}
+					});
+
+	var fiterdata =function(monthselected) {
+		var analytics = [{
+			"month": "january",
+			"category": "coffee",
+			"price": 50,
+			"name": "Pike Place Roast Brewed Coffee",
+			"flavor": "flavored",
+			"count": 500,
+			"roast": "medium",
+			"type": "regular"
+		},
+			{
+				"month": "january",
+				"category": "coffee",
+				"price": 40,
+				"name": "Starbucks VIA Ready Brew",
+				"flavor": "flavored",
+				"count": 548,
+				"roast": "blonde",
+				"type": "decaffinated"
+			},
+			{
+				"month": "january",
+				"category": "coffee",
+				"price": 50,
+				"name": "Starbucks Caffé Verona",
+				"flavor": "flavored",
+				"count": 57,
+				"roast": "medium",
+				"type": "regular"
+			},
+			{
+				"month": "january",
+				"category": "coffee",
+				"price": 20,
+				"name": "Starbucks Caffè K-Cup",
+				"flavor": "flavored",
+				"count": 39,
+				"roast": "dark",
+				"type": "regular"
+			},
+			{
+				"month": "january",
+				"category": "coffee",
+				"price": 40,
+				"name": "Milk Verismo Pods",
+				"flavor": "flavored",
+				"count": 233,
+				"roast": "blonde",
+				"type": "decaffinated"
+			},
+			{
+				"month": "february",
+				"category": "coffee",
+				"price": 50,
+				"name": "Starbucks VIA Ready Brew",
+				"flavor": "flavored",
+				"count": 50,
+				"roast": "medium",
+				"type": "regular"
+			},
+			{
+				"month": "february",
+				"category": "coffee",
+				"price": 40,
+				"name": "Guatemala Antigua Espresso ",
+				"flavor": "flavored",
+				"count": 97,
+				"roast": "blonde",
+				"type": "decaffinated"
+			},
+			{
+				"month": "february",
+				"category": "coffee",
+				"price": 90,
+				"name": "Starbucks Caffé Verona ",
+				"flavor": "flavored",
+				"count": 47,
+				"roast": "blonde",
+				"type": "decaffinated"
+			},
+			{
+				"month": "february",
+				"category": "coffee",
+				"price": 20,
+				"name": "Starbucks VIA Ready Brew",
+				"flavor": "flavored",
+				"count": 287,
+				"roast": "blonde",
+				"type": "decaffinated"
+			},
+			{
+				"month": "february",
+				"category": "coffee",
+				"price": 45,
+				"name": "Pike Place Roast Brewed Coffee",
+				"flavor": "flavored",
+				"count": 87,
+				"roast": "blonde",
+				"type": "decaffinated"
+			},
+			{
+				"month": "march",
+				"category": "coffee",
+				"price": 65,
+				"name": "Guatemala Antigua  Pods",
+				"flavor": "flavored",
+				"count": 287,
+				"roast": "blonde",
+				"type": "decaffinated"
+			},
+			{
+				"month": "march",
+				"category": "coffee",
+				"price": 75,
+				"name": "Starbucks Bright Sky Blend ",
+				"flavor": "flavored",
+				"count": 387,
+				"roast": "blonde",
+				"type": "decaffinated"
+			},
+			{
+				"month": "march",
+				"category": "coffee",
+				"price": 55,
+				"name": "Starbucks Vanilla",
+				"flavor": "flavored",
+				"count": 87,
+				"roast": "blonde",
+				"type": "decaffinated"
+			},
+			{
+				"month": "march",
+				"category": "coffee",
+				"price": 95,
+				"name": "Starbucks Mocha K-Cup",
+				"flavor": "flavored",
+				"count": 587,
+				"roast": "blonde",
+				"type": "decaffinated"
+			},
+			{
+				"month": "march",
+				"category": "coffee",
+				"price": 195,
+				"name": "Starbucks Dark Roast",
+				"flavor": "flavored",
+				"count": 587,
+				"roast": "blonde",
+				"type": "decaffinated"
+			},
+			{
+				"month": "march",
+				"category": "coffee",
+				"price": 65,
+				"name": "Fair Trade Certified  Cafè",
+				"flavor": "flavored",
+				"count": 200,
+				"roast": "blonde",
+				"type": "decaffinated"
+			},
+			{
+				"month": "april",
+				"category": "coffee",
+				"price": 65,
+				"name": "Fair Trade Certified  Cafè",
+				"flavor": "flavored",
+				"count": 150,
+				"roast": "blonde",
+				"type": "decaffinated"
+			},
+			{
+				"month": "april",
+				"category": "coffee",
+				"price": 65,
+				"name": "Starbucks Reserve Eastern",
+				"flavor": "flavored",
+				"count": 250,
+				"roast": "blonde",
+				"type": "decaffinated"
+			},
+			{
+				"month": "april",
+				"category": "coffee",
+				"price": 65,
+				"name": "Guatemala Antigua Espresso Verismo Pods",
+				"flavor": "flavored",
+				"count": 350,
+				"roast": "blonde",
+				"type": "decaffinated"
+			},
+			{
+				"month": "april",
+				"category": "coffee",
+				"price": 65,
+				"name": "Sulawesi, Whole Bean",
+				"flavor": "flavored",
+				"count": 650,
+				"roast": "blonde",
+				"type": "decaffinated"
+			},
+			{
+				"month": "april",
+				"category": "coffee",
+				"price": 65,
+				"name": "Starbucks VIA Ready Brew",
+				"flavor": "flavored",
+				"count": 450,
+				"roast": "blonde",
+				"type": "decaffinated"
+			}
+		]
+
+		var result = analytics.filter(function (value) {
+			console.log(monthselected)
+			return value.month === monthselected;   // or whatever you filter on
+		});
+		console.log(result);
 
 
-				<ul class="project-wrapper wow animated fadeInUp">
-					<li class="portfolio-item">
-						<img src="img/portfolio/item.jpg" class="img-responsive" alt="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat">
-						<figcaption class="mask">
-							<h3>Wall street</h3>
-							<p>Lorem Ipsum is simply dummy text of the printing and typesetting ndustry. </p>
-						</figcaption>
-						<ul class="external">
-							<li><a class="fancybox" title="Araund The world" data-fancybox-group="works" href="img/portfolio/item.jpg"><i class="fa fa-search"></i></a></li>
-							<li><a href=""><i class="fa fa-link"></i></a></li>
-						</ul>
-					</li>
+		var chart = new CanvasJS.Chart("chartContainer", {
+			theme: "theme2",//theme1
+			title: {
+				text: "Real time analytics of our Products for " +monthselected+ " 2016"
+			},
+			animationEnabled: true,   // change to true
+			data: [
+				{
+					type: "column",
+					dataPoints: [
+						{label: result[0]["name"], y: result[0]["count"]},
+						{label: result[1]["name"], y: result[1]["count"]},
+						{label: result[2]["name"], y: result[2]["count"]},
+						{label: result[3]["name"], y: result[3]["count"]},
+						{label: result[4]["name"], y: result[4]["count"]}
+					]
+				}
+			]
+		});
+		chart.render();
+	}
 
-					<li class="portfolio-item">
-						<img src="img/portfolio/item2.jpg" class="img-responsive" alt="Lorem Ipsum is simply dummy text of the printing and typesetting ndustry. ">
-						<figcaption class="mask">
-							<h3>Wall street</h3>
-							<p>Lorem Ipsum is simply dummy text of the printing and typesetting ndustry. </p>
-						</figcaption>
-						<ul class="external">
-							<li><a class="fancybox" title="Wall street" href="img/slider/banner.jpg" data-fancybox-group="works" ><i class="fa fa-search"></i></a></li>
-							<li><a href=""><i class="fa fa-link"></i></a></li>
-						</ul>
-					</li>
-
-					<li class="portfolio-item">
-						<img src="img/portfolio/item3.jpg" class="img-responsive" alt="Lorem Ipsum is simply dummy text of the printing and typesetting ndustry. ">
-						<figcaption class="mask">
-							<h3>Wall street</h3>
-							<p>Lorem Ipsum is simply dummy text of the printing and typesetting ndustry. </p>
-						</figcaption>
-						<ul class="external">
-							<li><a class="fancybox" title="Behind The world" data-fancybox-group="works" href="img/portfolio/item3.jpg"><i class="fa fa-search"></i></a></li>
-							<li><a href=""><i class="fa fa-link"></i></a></li>
-						</ul>
-					</li>
-
-					<li class="portfolio-item">
-						<img src="img/portfolio/item4.jpg" class="img-responsive" alt="Lorem Ipsum is simply dummy text of the printing and typesetting ndustry.">
-						<figcaption class="mask">
-							<h3>Wall street</h3>
-							<p>Lorem Ipsum is simply dummy text of the printing and typesetting ndustry. </p>
-						</figcaption>
-						<ul class="external">
-							<li><a class="fancybox" title="Wall street 4" data-fancybox-group="works" href="img/portfolio/item4.jpg"><i class="fa fa-search"></i></a></li>
-							<li><a href=""><i class="fa fa-link"></i></a></li>
-						</ul>
-					</li>
-
-					<li class="portfolio-item">
-						<img src="img/portfolio/item5.jpg" class="img-responsive" alt="Lorem Ipsum is simply dummy text of the printing and typesetting ndustry. ">
-						<figcaption class="mask">
-							<h3>Wall street</h3>
-							<p>Lorem Ipsum is simply dummy text of the printing and typesetting ndustry. </p>
-						</figcaption>
-						<ul class="external">
-							<li><a class="fancybox" title="Wall street 5" data-fancybox-group="works" href="img/portfolio/item5.jpg"><i class="fa fa-search"></i></a></li>
-							<li><a href=""><i class="fa fa-link"></i></a></li>
-						</ul>
-					</li>
-
-					<li class="portfolio-item">
-						<img src="img/portfolio/item6.jpg" class="img-responsive" alt="Lorem Ipsum is simply dummy text of the printing and typesetting ndustry. ">
-						<figcaption class="mask">
-							<h3>Wall street</h3>
-							<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
-						</figcaption>
-						<ul class="external">
-							<li><a class="fancybox" title="Wall street 6" data-fancybox-group="works" href="img/portfolio/item6.jpg"><i class="fa fa-search"></i></a></li>
-							<li><a href=""><i class="fa fa-link"></i></a></li>
-						</ul>
-					</li>
-				</ul>
+</script>
 
 			</div>
-		</div>
 	</section>
-	<!-- end portfolio section -->
+	<!-- end analytics section -->
 
 	<!-- Coffee-list -->
 	<section id="coffee-list" class="parallax">
