@@ -101,6 +101,15 @@ type ResponseController struct {
 
 /* ------- REST Functions ------- */
 
+// HealthCheck serves the healthcheck GET request
+func HealthCheck(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+	fmt.Println("HealthCheck")
+	if err := checkMongoSession(w); err !=nil {
+		return
+	}
+	sendSuccessResponse(w,200)
+}
+
 // DeleteUserCart deletes the user cart
 func DeleteUserCart(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
 	userid := p.ByName("userid")
@@ -712,6 +721,8 @@ func main() {
 
 	sess, _ := getSession()
 	rc = NewResponseController(sess)
+
+	r.GET("/mongoserver/healthcheck", HealthCheck)
 
 	r.GET("/mongoserver/login/:userid", Login)
 
