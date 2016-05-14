@@ -1,0 +1,876 @@
+
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
+<head>
+	<!-- meta character set -->
+	<meta charset="utf-8">
+	<!-- Always force latest IE rendering engine or request Chrome Frame -->
+	
+	<title>Welcome to StarBucks!!</title>
+	<!-- Meta Description -->
+	<meta name="description" content="Blue One Page Creative HTML5 Template">
+	<meta name="keywords" content="one page, single page, onepage, responsive, parallax, creative, business, html5, css3, css3 animation">
+	<meta name="author" content="Sagar Dafle">
+
+	<!-- Mobile Specific Meta -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- CSS
+    ================================================== -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script src="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <script>$('a[href="#"]').on('click', function(e) {
+            e.preventDefault();
+        });</script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css">
+	<!-- Fontawesome Icon font -->
+<style>.scrollable-menu {
+        height: auto;
+        max-height: 300px;
+        overflow-x: hidden;
+    }</style>
+	<!-- bootstrap.min -->
+	<link rel="stylesheet" href="stylesheets/css/jquery.fancybox.css">
+	<!-- bootstrap.min -->
+
+	<!-- bootstrap.min -->
+	<link rel="stylesheet" href="stylesheets/css/owl.carousel.css">
+	<!-- bootstrap.min -->
+	<link rel="stylesheet" href="stylesheets/css/slit-slider.css">
+	<!-- bootstrap.min -->
+	<link rel="stylesheet" href="stylesheets/css/animate.css">
+	<!-- Main Stylesheet -->
+	<link rel="stylesheet" href="stylesheets/css/main.css">
+
+	<!-- Modernizer Script for old Browsers -->
+	<script src="js/modernizr-2.6.2.min.js"></script>
+
+</head>
+
+<body id="body" ng-app= "myApp" ng-controller="Controller">
+
+<!-- preloader -->
+<div id="preloader">
+	<div class="loder-box">
+		<div class="battery"></div>
+	</div>
+</div>
+<!-- end preloader -->
+
+<!--
+Fixed Navigation
+==================================== -->
+<header id="navigation" class="navbar-inverse navbar-fixed-top animated-header">
+	<div class="container">
+		<div class="navbar-header">
+			<!-- responsive nav button -->
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<!-- /responsive nav button -->
+
+			<!-- logo -->
+			<!--<h1 class="navbar-brand">
+                <a href="#body">Blue</a>
+            </h1> -->
+			<!-- /logo -->
+		</div>
+
+		<!-- main nav -->
+		<nav class="collapse navbar-collapse navbar-right" role="navigation">
+			<ul id="nav" class="nav navbar-nav">
+				<li><a href="#body">Home</a></li>
+				<li><a href="#products">Products</a></li>
+                <li><a href="#analytics">Analytics</a></li>
+				<li><a href="#team">About us</a></li>
+				<!--<li><a href="#price">price</a></li> -->
+				 <li role="presentation" class="dropdown">
+					<a class="dropdown-toggle "  data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-shopping-cart" aria-hidden="true"></i>
+						MyBag <span class="badge">{{bagItems}}</span><span class="caret"/></a>
+
+					 <ul  ng-hide="noItem" class="dropdown-menu scrollable-menu list-group" role="menu" >
+						<li class="dropdown-item list-group-item" ng-repeat="c in cart"><span>{{c.name}}</span>&nbsp;&nbsp;&nbsp;{{c.price|currency}}</li>
+                         <div class="dropdown-divider"></div>
+						 <li><a href="#chkOut" class="btn btn-red ">Checkout</a></li>
+
+						 </li>
+
+
+					</ul>
+                     <ul  ng-show="noItem" class="dropdown-menu list-group" >
+                         <li class="dropdown-item list-group-item" ><span>No Item In Bag</span></li>
+
+                     </ul>
+
+				</li>
+                <li><a type="submit" href="" ng-click="logout()" >Log Out</a></li>
+			</ul>
+		</nav>
+		<!-- /main nav -->
+
+	</div>
+</header>
+<!--
+End Fixed Navigation
+==================================== -->
+
+<main  class="site-content" role="main">
+
+	<!--
+    Home Slider
+    ==================================== -->
+
+	<section id="home-slider">
+		<div id="slider" class="sl-slider-wrapper">
+
+			<div class="sl-slider">
+
+				<div class="sl-slide" data-orientation="horizontal" data-slice1-rotation="-25" data-slice2-rotation="-25" data-slice1-scale="2" data-slice2-scale="2">
+
+					<div class="bg-img bg-img-1"></div>
+
+					<div class="slide-caption">
+						<div class="caption-content">
+							<h2 class="animated fadeInDown">Welcome to StarBucks!</h2>
+							<span class="animated fadeInDown">CMPE-281 Team #7</span>
+							<a href="#coffee-list" class="btn btn-blue btn-effect">Coffee Catalogue</a>
+						</div>
+					</div>
+
+				</div>
+
+				<div class="sl-slide" data-orientation="vertical" data-slice1-rotation="10" data-slice2-rotation="-15" data-slice1-scale="1.5" data-slice2-scale="1.5">
+
+					<div class="bg-img bg-img-2"></div>
+					<div class="slide-caption">
+						<div class="caption-content">
+							<h2>Welcome to StarBucks!</h2>
+							<span>CMPE-281 Team #7</span>
+							<a href="#tea-list" class="btn btn-blue btn-effect">Tea Catalogue</a>
+						</div>
+					</div>
+
+				</div>
+
+				<div class="sl-slide" data-orientation="horizontal" data-slice1-rotation="3" data-slice2-rotation="3" data-slice1-scale="2" data-slice2-scale="1">
+
+					<div class="bg-img bg-img-3"></div>
+					<div class="slide-caption">
+						<div class="caption-content">
+							<h2>Welcome to StarBucks!</h2>
+							<span>CMPE-281 Team #7</span>
+							<a href="#drinks-list" class="btn btn-blue btn-effect">Drink Catalogue</a>
+						</div>
+					</div>
+
+				</div>
+
+			</div><!-- /sl-slider -->
+
+			<!--
+            <nav id="nav-arrows" class="nav-arrows">
+                <span class="nav-arrow-prev">Previous</span>
+                <span class="nav-arrow-next">Next</span>
+            </nav>
+            -->
+
+			<nav id="nav-arrows" class="nav-arrows hidden-xs hidden-sm visible-md visible-lg">
+				<a href="javascript:;" class="sl-prev">
+					<i class="fa fa-angle-left fa-3x"></i>
+				</a>
+				<a href="javascript:;" class="sl-next">
+					<i class="fa fa-angle-right fa-3x"></i>
+				</a>
+			</nav>
+
+
+			<nav id="nav-dots" class="nav-dots visible-xs visible-sm hidden-md hidden-lg">
+				<span class="nav-dot-current"></span>
+				<span></span>
+				<span></span>
+			</nav>
+
+		</div><!-- /slider-wrapper -->
+	</section>
+
+	<!--
+    End Home SliderEnd
+    ==================================== -->
+
+	<!-- about section -->
+	<section id="team" >
+		<div id="team" class="container-fluid text-center">
+			<h2>Our Team</h2>
+			<br>
+			<div class="row slideanim">
+				<div class="col-sm-3">
+					<img class="img-circle" src="images/team/pooja.jpg" alt="pooja" width="100" height="100">
+					<h4>Pooja Yelure</h4>
+					<a target="_blank" href="https://www.linkedin.com/in/poojayelure" style="text-decoration:none;"><span style="font: 80% Arial,sans-serif; color:#0783B6;"><img src="https://static.licdn.com/scds/common/u/img/webpromo/btn_in_20x15.png" width="20" height="15" alt="View Pooja  Yelure's LinkedIn profile" style="vertical-align:middle;" border="0">&nbsp;View Pooja Yelure's profile</span></a>
+				</div>
+				<div class="col-sm-3">
+					<img class="img-circle" src="images/team/shubham.jpg" alt="Shubham" width="100" height="100">
+					<h4>Shubham Vadhera</h4>
+					<a target="_blank" href="https://www.linkedin.com/in/shubhamvadhera" style="text-decoration:none;"><span style="font: 80% Arial,sans-serif; color:#0783B6;"><img src="https://static.licdn.com/scds/common/u/img/webpromo/btn_in_20x15.png" width="20" height="15" alt="View Shubham Vadhera's LinkedIn profile" style="vertical-align:middle;" border="0">&nbsp;View Shubham Vadhera's profile</span></a>
+				</div>
+				<div class="col-sm-3">
+					<img class="img-circle" src="images/team/sagar.jpg" alt="sagar" width="100" height="100">
+					<h4>Sagar Dafle</h4>
+					<a target="_blank" href="https://www.linkedin.com/in/sagardafle" style="text-decoration:none;"><span style="font: 80% Arial,sans-serif; color:#0783B6;"><img src="https://static.licdn.com/scds/common/u/img/webpromo/btn_in_20x15.png" width="20" height="15" alt="View Saga Dafle's LinkedIn profile" style="vertical-align:middle;" border="0">&nbsp;View Sagar Dafle's profile</span></a>
+				</div>
+
+				<div class="col-sm-3">
+					<img class="img-circle" src="images/team/jagmohan.jpg" alt="Jagmohan" width="100" height="100">
+					<h4 style="color:#303030;">Jagmohan Singh</h4>
+					<a target="_blank" href="https://www.linkedin.com/pub/jagmohan-singh/36/182/708" style="text-decoration:none;"><span style="font: 80% Arial,sans-serif; color:#0783B6;"><img src="https://static.licdn.com/scds/common/u/img/webpromo/btn_in_20x15.png" width="20" height="15" alt="View Jagmohan Singh's LinkedIn profile" style="vertical-align:middle;" border="0">&nbsp;View Jagmohan Singh's profile</span></a>
+				</div>
+			</div>
+
+		</div>
+	</section>
+	<!-- end about section -->
+
+
+	<!-- Service section -->
+	<section id="products">
+		<div class="container">
+			<div class="row">
+
+				<div class="sec-title text-center">
+					<h2 class="wow animated bounceInLeft">Products</h2>
+					<p class="wow animated bounceInRight">Choose your product now!</p>
+				</div>
+
+				<div class="col-md-3 col-sm-6 col-xs-12 text-center wow animated zoomIn">
+					<div class="service-item">
+						<div class="service-icon">
+							<i class="fa fa-coffee fa-3x"></i>
+						</div>
+						<h3>Coffee</h3>
+
+					</div>
+					<div class ="view-coffee-list">
+						<a href="#coffee-list" class="btn btn-blue btn-effect">Buy Now!</a>
+					</div>
+				</div>
+
+				<div class="col-md-3 col-sm-6 col-xs-12 text-center wow animated zoomIn" data-wow-delay="0.3s">
+					<div class="service-item">
+						<div class="service-icon">
+							<i class="fa fa-leaf fa-3x"></i>
+						</div>
+						<h3>Tea</h3>
+
+
+					</div>
+					<div class ="view-tea-list">
+						<a href="#tea-list" class="btn btn-blue btn-effect">Buy Now!</a>
+					</div>
+				</div>
+
+				<div class="col-md-3 col-sm-6 col-xs-12 text-center wow animated zoomIn" data-wow-delay="0.6s">
+					<div class="service-item">
+						<div class="service-icon">
+							<i class="fa fa-beer fa-3x"></i>
+						</div>
+						<h3>Drinkwares</h3>
+
+					</div>
+					<div class ="view-drinks-list">
+						<a href="#drinks-list" class="btn btn-blue btn-effect">Buy Now!</a>
+					</div>
+				</div>
+
+				<div class="col-md-3 col-sm-6 col-xs-12 text-center wow animated zoomIn" data-wow-delay="0.9s">
+					<div class="service-item">
+						<div class="service-icon">
+							<i class="fa fa-code-fork fa-3x"></i>
+						</div>
+						<h3>Github</h3>
+
+
+					</div>
+					<div class ="github-fork">
+						<a href="https://github.com/shubhamvadhera/cmpe281-teamproject/" class="btn btn-blue btn-effect">Fork now!</a>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</section>
+	<!-- end Service section -->
+
+	<!-- portfolio section -->
+
+	<!-- end portfolio section -->
+
+	<!-- Coffee-list -->
+	<section id="coffee-list" class="parallax">
+		<div class="overlay">
+			<div class="row">
+				<div class="col-md-1"></div>
+			<div class="col-md-3">
+				<b style="color:black">CAFFEINE</b> <input placeholder="Regular | Decaffinated" style="color:black;border-radius:7px" ng-model="caf.type">
+			</div>
+			<div class="col-md-3">
+				<b style="color:black">ROAST&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   </b> <input placeholder="blonde | medium | dark" style="border-radius:7px;color:black" ng-model="caf.roast">
+			</div>
+			<div class="col-md-3">
+				<b style="color:black">REGION&nbsp;&nbsp;&nbsp;  </b> <input placeholder="latin america | asia-pacific | multi | Dark"style="border-radius:7px;color:black" ng-model="caf.region">
+			</div>
+				<div class="col-md-1"></div>
+			</div>
+            <br><br>
+            <hr>
+				<div class="container">
+				<div class="row">
+
+					<div>
+
+						<div class="row">
+							<div class= "col-md-4"  ng-repeat="coffeedata in coffecataloge | filter:caf:strict">
+								<div id="product-box" style="width:620px;height:390px;" >
+									<div id ="individual-products"style="width:310px;height:395px;border:1px solid ;border-radius: 15px; background-color:#ffffff">
+										<div>&nbsp;&nbsp;&nbsp;
+											<figure>
+												<input id="hiddenattr" type="hidden" value="{{($index+1)%9}}" ;>
+												<img id="product-images" style="margin-top:20px;margin-left:30px;width:200px;height:190px"/>
+												<script type="text/javascript" >
+													var hiddenvariablecoffee = document.getElementById("hiddenattr").value;
+													var coffeeeimagepath = "img/products/coffee/coffee-"+hiddenvariablecoffee+".jpg" ;
+													document.getElementById("product-images").src = coffeeeimagepath;
+												</script>
+												<div class="product-data"><figcaption id="fig-caption">{{ coffeedata.name | limitTo: 30 }}{{coffeedata.name > 30 ? '...' : ''}}</figcaption></div>
+											</figure>
+										</div>
+										<input class="product-data" id="step-count"style="color:black" type="number" ng-model="quantity" name="quantity" min="0" max="100">
+										<div class="product-data" id ="price-lb" >${{ coffeedata.price }} / {{coffeedata.quantity}} lb</div>
+										<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+										<a href="" ng-click="addCart(coffeedata.item_id,coffeedata.category,quantity)" class="btn btn-red btn-effect">Add to Bag</a>
+									</div>
+								</div>
+								<br><br>
+							</div>
+						</div>
+						<hr>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+	<!-- Tea-list -->
+
+
+	<section id="tea-list" class="parallax">
+
+		<div class="overlay">
+            <div class="row">
+                <div class="col-md-1">
+                </div>
+                <div class="col-md-5">
+                    <b style="color:black">TEA FORM</b> <input placeholder="Tea Bags | Latte Concentrate | K-Cup® Pods" style="color:black;border-radius:7px" ng-model="teaa.tea_form">
+                </div>
+                <div class="col-md-5">
+                    <b style="color:black">BRAND&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </b> <input placeholder=" Tazo | Teavana" style="border-radius:7px;color:black" ng-model="teaa.brand">
+                </div>
+                <div class="col-md-1">
+                </div>
+
+
+            </div>
+            <br><br>
+            <hr>
+
+			<div class="container">
+
+
+
+						<div class="row">
+
+							<div class= "col-md-4" ng-repeat="teadata in teacataloge | filter:teaa:strict">
+
+								<div id="product-box-tea" style="width:620px;height:390px ;" >
+									<div id ="individual-products-teas"style="width:310px;height:395px;border:1px solid #ffffff;border-radius: 15px;">
+										<div>&nbsp;&nbsp;&nbsp;
+											<figure>
+												<input id="hiddenattrtea" type="hidden"  value="{{($index+1)%9}}" ;>
+												<img id="product-images-tea" style="margin-top:20px;margin-left:30px;width:200px;height:190px"/>
+												<script type="text/javascript" >
+													var hiddenvariabletea = document.getElementById("hiddenattrtea").value;
+													var teaimagepath = "img/products/tea/tea-"+hiddenvariabletea+".jpg" ;
+													document.getElementById("product-images-tea").src = teaimagepath;
+												</script>
+												<div class="product-data"><figcaption id="fig-caption-tea">{{ teadata.name | limitTo: 30 }}{{teadata.name > 30 ? '...' : ''}}</figcaption></div>
+											</figure>
+										</div>
+										<input class="product-data" id="step-count-tea"style="color:black" type="number" ng-model="quantity" name="quantity" min="0" max="100">
+										<div class="product-data" id ="price-lb-tea" >${{ teadata.price }} / {{teadata.quantity}} lb</div>
+										<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<a href="" ng-click="addCart(teadata.item_id,teadata.category,quantity)" class="btn btn-red btn-effect">Add to Cart</a>
+									</div>
+								</div>
+								<br><br>
+							</div>
+						</div>
+						<hr>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+	<!-- Drinks-list -->
+	<section id="drinks-list" class="parallax">
+		<div class="overlay">
+			<div class="container">
+				<div class="row">
+					<!--<b>Narrow by</b><br> -->
+					<div class="sec-title text-center white wow animated fadeInDown">
+						<!-- <div id ="filter-drinks">
+							<br>
+							<b style="color:black">SIZE</b> <input placeholder="Demi | Short | Tall" style="color:black;border-radius:7px" ng-model="search.type"><br><br>
+							<b style="color:black">MATERIAL&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   </b> <input placeholder="Ceramic | Stainless Steel | Plastic" style="border-radius:7px;color:black" ng-model="search.roast"><br><br>
+						</div> -->
+						<h2>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Grab yor drinkwares!</h2>
+					</div>
+					<div>
+
+						<div class="row">
+							<div class= "col-md-4"  ng-repeat="drinkdata in drinkcataloge | filter:drk:strict">
+								<div id="product-box-drink" style="width:620px;height:390px;" >
+									<div id ="individual-products-drinks"style="width:310px;height:395px;border:1px solid ;border-radius: 15px; background-color:#ffffff">
+										<div>&nbsp;&nbsp;&nbsp;
+											<figure>
+												<input id="hiddenattrdrink" type="hidden" name="country" value="{($index+1)}" ;>
+												<img id="product-images-drink" style="margin-top:20px;margin-left:30px;width:200px;height:190px"/>
+												<script type="text/javascript" >
+													var hiddenvariabledrink = document.getElementById("hiddenattr").value;
+													var drinksimagepath = "img/products/drinks/drink-"+hiddenvariabledrink+".jpg" ;
+													document.getElementById("product-images-drink").src = drinksimagepath;
+												</script>
+												<div class="product-data"><figcaption id="fig-caption-drink">{{ drinkdata.name | limitTo: 30 }}{{drinkdata.name > 30 ? '...' : ''}}</figcaption></div>
+											</figure>
+										</div>
+										<input class="product-data" id="step-count-drink"style="color:black" type="number" ng-model="quantity" name="quantity" min="0" max="100">
+										<div class="product-data" id ="price-lb-drink" >${{ drinkdata.price }} / {{drinkdata.quantity}} lb</div>
+										<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<a href="" ng-click="addCart(drinkdata.item_id,drinkdata.category,quantity)" class="btn btn-red btn-effect">Add to Cart</a>
+									</div>
+								</div>
+								<br><br>
+							</div>
+						</div>
+						<hr>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<!--&lt;!&ndash; Social section &ndash;&gt;-->
+	<!--<section id="social" class="parallax">-->
+		<!--<div class="overlay">-->
+			<!--<div class="container">-->
+				<!--<div class="row">-->
+
+					<!--<div class="sec-title text-center white wow animated fadeInDown">-->
+						<!--<h2>FOLLOW US</h2>-->
+						<!--<p>Beautifully simple follow buttons to help you get followers on</p>-->
+					<!--</div>-->
+
+					<!--<ul class="social-button">-->
+						<!--<li class="wow animated zoomIn"><a href="#"><i class="fa fa-thumbs-up fa-2x"></i></a></li>-->
+						<!--<li class="wow animated zoomIn" data-wow-delay="0.3s"><a href="#"><i class="fa fa-twitter fa-2x"></i></a></li>-->
+						<!--<li class="wow animated zoomIn" data-wow-delay="0.6s"><a href="#"><i class="fa fa-dribbble fa-2x"></i></a></li>-->
+					<!--</ul>-->
+
+				<!--</div>-->
+			<!--</div>-->
+		<!--</div>-->
+	<!--</section>-->
+	<!-- end Social section -->
+	<!-- Start checkout section -->
+	<section id="chkOut" >
+		<% include cart_checkout_payment.ejs %>
+	</section>
+	<!-- end CheckOut section -->
+	<!-- Contact section -->
+    <section id="analytics">
+    <div class="container">
+        <div class="row">
+
+            <div class="sec-title text-center wow animated fadeInDown">
+                <h2>Real time analytics</h2>
+            </div>
+
+            <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+            <link href="stylesheets/monthpicker.css" rel="stylesheet" type="text/css">
+            <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.min.js"></script>
+            <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+
+            <link rel="stylesheet" type="text/css" media="screen" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/base/jquery-ui.css">
+            <p>Choose the month you wish to view the logs for:</p> <input id="demo-1" type="text" />
+        </div>
+
+        <script src="js/monthpicker.js"></script>
+        <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/canvasjs/1.7.0/jquery.canvasjs.min.js"></script>
+        <script>
+            var monthselected ="";
+            $('#demo-1').Monthpicker({
+                dateFormat: 'yymmdd',
+                onSelect: function (dateText, inst) {
+                    var dateStringForApi = $('#demo-1').val();
+                    if (dateStringForApi == "02/2016") {
+                        monthselected = "february";
+                    }
+                    if (dateStringForApi == "03/2016") {
+                        monthselected = "march";
+                    }
+                    if (dateStringForApi == "01/2016") {
+                        monthselected = "january";
+                    }
+                    if (dateStringForApi == "04/2016") {
+                        monthselected = "april";
+                    }
+
+                    fiterdata(monthselected);
+                }
+            });
+
+            var fiterdata =function(monthselected) {
+                var analytics = [{
+                    "month": "january",
+                    "category": "coffee",
+                    "price": 50,
+                    "name": "Pike Place Roast Brewed Coffee",
+                    "flavor": "flavored",
+                    "count": 500,
+                    "roast": "medium",
+                    "type": "regular"
+                },
+                    {
+                        "month": "january",
+                        "category": "coffee",
+                        "price": 40,
+                        "name": "Starbucks VIA Ready Brew",
+                        "flavor": "flavored",
+                        "count": 548,
+                        "roast": "blonde",
+                        "type": "decaffinated"
+                    },
+                    {
+                        "month": "january",
+                        "category": "coffee",
+                        "price": 50,
+                        "name": "Starbucks Caffé Verona",
+                        "flavor": "flavored",
+                        "count": 57,
+                        "roast": "medium",
+                        "type": "regular"
+                    },
+                    {
+                        "month": "january",
+                        "category": "coffee",
+                        "price": 20,
+                        "name": "Starbucks Caffè K-Cup",
+                        "flavor": "flavored",
+                        "count": 39,
+                        "roast": "dark",
+                        "type": "regular"
+                    },
+                    {
+                        "month": "january",
+                        "category": "coffee",
+                        "price": 40,
+                        "name": "Milk Verismo Pods",
+                        "flavor": "flavored",
+                        "count": 233,
+                        "roast": "blonde",
+                        "type": "decaffinated"
+                    },
+                    {
+                        "month": "february",
+                        "category": "coffee",
+                        "price": 50,
+                        "name": "Starbucks VIA Ready Brew",
+                        "flavor": "flavored",
+                        "count": 50,
+                        "roast": "medium",
+                        "type": "regular"
+                    },
+                    {
+                        "month": "february",
+                        "category": "coffee",
+                        "price": 40,
+                        "name": "Guatemala Antigua Espresso ",
+                        "flavor": "flavored",
+                        "count": 97,
+                        "roast": "blonde",
+                        "type": "decaffinated"
+                    },
+                    {
+                        "month": "february",
+                        "category": "coffee",
+                        "price": 90,
+                        "name": "Starbucks Caffé Verona ",
+                        "flavor": "flavored",
+                        "count": 47,
+                        "roast": "blonde",
+                        "type": "decaffinated"
+                    },
+                    {
+                        "month": "february",
+                        "category": "coffee",
+                        "price": 20,
+                        "name": "Starbucks VIA Ready Brew",
+                        "flavor": "flavored",
+                        "count": 287,
+                        "roast": "blonde",
+                        "type": "decaffinated"
+                    },
+                    {
+                        "month": "february",
+                        "category": "coffee",
+                        "price": 45,
+                        "name": "Pike Place Roast Brewed Coffee",
+                        "flavor": "flavored",
+                        "count": 87,
+                        "roast": "blonde",
+                        "type": "decaffinated"
+                    },
+                    {
+                        "month": "march",
+                        "category": "coffee",
+                        "price": 65,
+                        "name": "Guatemala Antigua  Pods",
+                        "flavor": "flavored",
+                        "count": 287,
+                        "roast": "blonde",
+                        "type": "decaffinated"
+                    },
+                    {
+                        "month": "march",
+                        "category": "coffee",
+                        "price": 75,
+                        "name": "Starbucks Bright Sky Blend ",
+                        "flavor": "flavored",
+                        "count": 387,
+                        "roast": "blonde",
+                        "type": "decaffinated"
+                    },
+                    {
+                        "month": "march",
+                        "category": "coffee",
+                        "price": 55,
+                        "name": "Starbucks Vanilla",
+                        "flavor": "flavored",
+                        "count": 87,
+                        "roast": "blonde",
+                        "type": "decaffinated"
+                    },
+                    {
+                        "month": "march",
+                        "category": "coffee",
+                        "price": 95,
+                        "name": "Starbucks Mocha K-Cup",
+                        "flavor": "flavored",
+                        "count": 587,
+                        "roast": "blonde",
+                        "type": "decaffinated"
+                    },
+                    {
+                        "month": "march",
+                        "category": "coffee",
+                        "price": 195,
+                        "name": "Starbucks Dark Roast",
+                        "flavor": "flavored",
+                        "count": 587,
+                        "roast": "blonde",
+                        "type": "decaffinated"
+                    },
+                    {
+                        "month": "march",
+                        "category": "coffee",
+                        "price": 65,
+                        "name": "Fair Trade Certified  Cafè",
+                        "flavor": "flavored",
+                        "count": 200,
+                        "roast": "blonde",
+                        "type": "decaffinated"
+                    },
+                    {
+                        "month": "april",
+                        "category": "coffee",
+                        "price": 65,
+                        "name": "Fair Trade Certified  Cafè",
+                        "flavor": "flavored",
+                        "count": 150,
+                        "roast": "blonde",
+                        "type": "decaffinated"
+                    },
+                    {
+                        "month": "april",
+                        "category": "coffee",
+                        "price": 65,
+                        "name": "Starbucks Reserve Eastern",
+                        "flavor": "flavored",
+                        "count": 250,
+                        "roast": "blonde",
+                        "type": "decaffinated"
+                    },
+                    {
+                        "month": "april",
+                        "category": "coffee",
+                        "price": 65,
+                        "name": "Guatemala Antigua Espresso Verismo Pods",
+                        "flavor": "flavored",
+                        "count": 350,
+                        "roast": "blonde",
+                        "type": "decaffinated"
+                    },
+                    {
+                        "month": "april",
+                        "category": "coffee",
+                        "price": 65,
+                        "name": "Sulawesi, Whole Bean",
+                        "flavor": "flavored",
+                        "count": 650,
+                        "roast": "blonde",
+                        "type": "decaffinated"
+                    },
+                    {
+                        "month": "april",
+                        "category": "coffee",
+                        "price": 65,
+                        "name": "Starbucks VIA Ready Brew",
+                        "flavor": "flavored",
+                        "count": 450,
+                        "roast": "blonde",
+                        "type": "decaffinated"
+                    }
+                ]
+
+                var result = analytics.filter(function (value) {
+                    console.log(monthselected)
+                    return value.month === monthselected;   // or whatever you filter on
+                });
+                console.log(result);
+
+
+                var chart = new CanvasJS.Chart("chartContainer", {
+                    theme: "theme2",//theme1
+                    title: {
+                        text: "Real time analytics of our Products for " +monthselected+ " 2016"
+                    },
+                    animationEnabled: true,   // change to true
+                    data: [
+                        {
+                            type: "column",
+                            dataPoints: [
+                                {label: result[0]["name"], y: result[0]["count"]},
+                                {label: result[1]["name"], y: result[1]["count"]},
+                                {label: result[2]["name"], y: result[2]["count"]},
+                                {label: result[3]["name"], y: result[3]["count"]},
+                                {label: result[4]["name"], y: result[4]["count"]}
+                            ]
+                        }
+                    ]
+                });
+                chart.render();
+            }
+
+        </script>
+
+    </div>
+    </section>
+	<!-- end Contact section -->
+
+
+</main>
+
+<footer id="footer">
+	<div class="container">
+		<div class="row text-center">
+			<div class="footer-content">
+				<div class="wow animated fadeInDown">
+					<p>newsletter signup</p>
+					<p>Get Cool Stuff! We hate spam!</p>
+				</div>
+				<form action="#" method="post" class="subscribe-form wow animated fadeInUp">
+					<div class="input-field">
+						<input type="email" class="subscribe form-control" placeholder="Enter Your Email...">
+						<button type="submit" class="submit-icon">
+							<i class="fa fa-paper-plane fa-lg"></i>
+						</button>
+					</div>
+				</form>
+				<div class="footer-social">
+					<ul>
+						<li class="wow animated zoomIn"><a href="#"><i class="fa fa-thumbs-up fa-3x"></i></a></li>
+						<li class="wow animated zoomIn" data-wow-delay="0.3s"><a href="#"><i class="fa fa-twitter fa-3x"></i></a></li>
+						<li class="wow animated zoomIn" data-wow-delay="0.6s"><a href="#"><i class="fa fa-skype fa-3x"></i></a></li>
+						<li class="wow animated zoomIn" data-wow-delay="0.9s"><a href="#"><i class="fa fa-dribbble fa-3x"></i></a></li>
+						<li class="wow animated zoomIn" data-wow-delay="1.2s"><a href="#"><i class="fa fa-youtube fa-3x"></i></a></li>
+					</ul>
+				</div>
+
+
+			</div>
+		</div>
+	</div>
+</footer>
+
+<!-- Essential jQuery Plugins
+================================================== -->
+<!-- Main jQuery -->
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0-rc.2/angular.min.js"></script>
+
+<script src="js/jquery-1.11.1.min.js"></script>
+<!-- Twitter Bootstrap -->
+<script src="js/bootstrap.min.js"></script>
+<!-- Single Page Nav -->
+<script src="js/jquery.singlePageNav.min.js"></script>
+<!-- jquery.fancybox.pack -->
+<script src="js/jquery.fancybox.pack.js"></script>
+<!-- Google Map API -->
+
+<!-- Owl Carousel -->
+<script src="js/owl.carousel.min.js"></script>
+<!-- jquery easing -->
+<script src="js/jquery.easing.min.js"></script>
+<!-- Fullscreen slider -->
+<script src="js/jquery.slitslider.js"></script>
+<script src="js/jquery.ba-cond.min.js"></script>
+<!-- onscroll animation -->
+<script src="js/wow.min.js"></script>
+<!-- Custom Functions -->
+<script src="js/main.js"></script>
+
+</body>
+</html>
