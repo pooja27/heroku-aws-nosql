@@ -1,11 +1,31 @@
 ps -eaf|grep mongod
 sudo service mongod status
 sudo service mongod start
+sudo service mongod stop
+
+sudo mkdir -p /data/db/
+sudo chown -R `id -u` /data/db
+sudo nano /etc/mongod.conf
+sudo nano /etc/hosts
+------------------------------
+127.0.0.1   localhost localhost.localdomain
+127.0.0.1   ip-172-32-1-9
+172.32.2.167 ip-172-32-2-167
+172.32.3.65 ip-172-32-3-65
+-------------------------------------------
 
 sudo netstat -nalp | grep 27017
 sudo fuser -v -n tcp 27017
 
 mongod --port 27017 --dbpath /data/db/ --replSet rs0
+
+rs.slaveOk()
+
+java -server -jar restheart.jar
+
+REST:
+http://ec2-52-87-205-198.compute-1.amazonaws.com:8080/db_db1/inventory
+
 
 Queries:
 show dbs | Print a list of all databases on the server.
@@ -15,4 +35,4 @@ db.users.find().pretty()
 
 db.createCollection("inventory")
 
-db.cart.insert( { userid: "tuser@gmail.com", items: [{item_id: "tea_9", price: 56}, {item_id: "coffee_9", price: 46}] } )
+db.gumball.insert( { userid: "tuser@gmail.com", items: [{item_id: "tea_9", price: 56}, {item_id: "coffee_9", price: 46}] } )
